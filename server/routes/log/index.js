@@ -87,7 +87,6 @@ router.post('/:baby_id/head', (req,res) => {
     utils.show201SuccessMessage(res, logData);
 });
 
-
 /* 
 Request Body:
 {
@@ -122,6 +121,50 @@ router.post('/:baby_id/height', (req,res) => {
         event_type: req.body.event_type,
         event_detail: {
             height: req.body.height,
+            unit: req.body.unit
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
+/* 
+Request Body:
+{
+    "event_type": "weight",
+    "event_datetime": 1647676171,
+    "weight": 3.5,
+    "unit": "kg"
+}
+*/
+router.post('/:baby_id/weight', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.weight || !req.body.unit) {
+        security.showLogPropertiesRequired(res, ["weight", "unit"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            weight: req.body.weight,
             unit: req.body.unit
         },
         event_datetime: req.body.event_datetime,
