@@ -63,6 +63,15 @@ router.post('/:baby_id/head', (req,res) => {
         security.showBabyInvalid(res);
         return;
     }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.circumference || !req.body.unit) {
+        security.showLogPropertiesRequired(res, ["circumference", "unit"]);
+        return;
+    }
     const logData = {
         id: utils.getNewId(Object.keys(logs)),
         event_type: req.body.event_type,
