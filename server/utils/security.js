@@ -26,6 +26,14 @@ const getParentFromSession = function(req) {
     return undefined;
 }
 
+const areBasicLogPropertiesProvided = function(req) {
+    if (req.body.event_type && req.body.event_datetime) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const showBabyInvalid = function(res) {
     res.status(401).json({ message: "Unauthorized. Please provide valid baby id." });
 }
@@ -34,4 +42,20 @@ const showParentInvalid = function(res) {
     res.status(401).json({ message: "Unauthorized. Please provide valid parent id." });
 }
 
-module.exports = { isBabyYours, getParentFromSession, showBabyInvalid, showParentInvalid }
+const showLogPropertiesRequired = function(res, properties) {
+    res.status(400).json({ message: `Bad Request. The following 'Log' propertie(s) required: ${properties}.` });
+}
+
+const showLogBasicPropertiesRequired = function(res) {
+    showLogPropertiesRequired(res, ["event_type", "event_datetime"]);
+}
+
+module.exports = { 
+    isBabyYours, 
+    getParentFromSession, 
+    showBabyInvalid, 
+    showParentInvalid, 
+    areBasicLogPropertiesProvided,
+    showLogPropertiesRequired,
+    showLogBasicPropertiesRequired
+}
