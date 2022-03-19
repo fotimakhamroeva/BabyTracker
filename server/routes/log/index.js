@@ -175,4 +175,180 @@ router.post('/:baby_id/weight', (req,res) => {
     utils.show201SuccessMessage(res, logData);
 });
 
+/* 
+Request Body:
+{
+    "event_type": "temperature",
+    "event_datetime": 1647676171,
+    "temperature": 36.5,
+    "unit": "C"
+}
+*/
+router.post('/:baby_id/temperature', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.temperature || !req.body.unit) {
+        security.showLogPropertiesRequired(res, ["temperature", "unit"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            temperature: req.body.temperature,
+            unit: req.body.unit
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
+/* 
+Request Body:
+{
+    "event_type": "medicine",
+    "event_datetime": 1647676171,
+    "medicine_name": "Tylenol Syrup",
+    "medicine_dose": "5 mg"
+}
+*/
+router.post('/:baby_id/medicine', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.medicine_name || !req.body.medicine_dose) {
+        security.showLogPropertiesRequired(res, ["medicine_name", "medicine_dose"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            medicine_name: req.body.medicine_name,
+            medicine_dose: req.body.medicine_dose
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
+/* 
+Request Body:
+{
+    "event_type": "vaccine",
+    "event_datetime": 1647676171,
+    "vaccine_name": "4 month-vaccine",
+    "vaccine_detail": "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
+}
+*/
+router.post('/:baby_id/vaccine', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.vaccine_name || !req.body.vaccine_detail) {
+        security.showLogPropertiesRequired(res, ["vaccine_name", "vaccine_detail"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            vaccine_name: req.body.vaccine_name,
+            vaccine_detail: req.body.vaccine_detail
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
+/* 
+Request Body:
+{
+    "event_type": "appointment",
+    "event_datetime": 1647676171,
+    "appointment_location": "33 Testers Drive, London UK",
+    "appointment_detail": "3 months with Dr. Mackyla"
+}
+*/
+router.post('/:baby_id/appointment', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.appointment_location || !req.body.appointment_detail) {
+        security.showLogPropertiesRequired(res, ["appointment_location", "appointment_detail"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            appointment_location: req.body.appointment_location,
+            appointment_detail: req.body.appointment_detail
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
 module.exports = router;

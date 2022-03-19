@@ -83,8 +83,8 @@ const logs = {
         id: 3,
         event_type: LogTypes.APPOINTMENT,
         event_detail: {
-            location: "33 Testers Drive, London UK",
-            detail: "3 months with Dr. Mackyla"
+            appointment_location: "33 Testers Drive, London UK",
+            appointment_detail: "3 months with Dr. Mackyla"
         },
         event_datetime: 1650354571,
         baby_id: 1,
@@ -92,10 +92,10 @@ const logs = {
     },
     4: {
         id: 4,
-        event_type: LogTypes.MEDICINE,
+        event_type: LogTypes.VACCINE,
         event_detail: {
-            name: "4 month vaccine",
-            detail: "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
+            vaccine_name: "4 month vaccine",
+            vaccine_detail: "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
         },
         event_datetime: 1647848971,
         baby_id: 2,
@@ -111,7 +111,18 @@ const logs = {
         event_datetime: 1647676171,
         baby_id: 1,
         created_by: 1
-    }
+    },
+    6: {
+        id: 6,
+        event_type: LogTypes.MEDICINE,
+        event_detail: {
+            medicine_name: "Tylenol Syrup",
+            medicine_dose: "5 mg"
+        },
+        event_datetime: 1647848971,
+        baby_id: 2,
+        created_by: 1
+    },
 }
 
 module.exports = { LogTypes, users, logs, babies, parentBabies }
