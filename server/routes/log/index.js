@@ -175,4 +175,48 @@ router.post('/:baby_id/weight', (req,res) => {
     utils.show201SuccessMessage(res, logData);
 });
 
+/* 
+Request Body:
+{
+    "event_type": "temperature",
+    "event_datetime": 1647676171,
+    "temperature": 36.5,
+    "unit": "C"
+}
+*/
+router.post('/:baby_id/temperature', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.temperature || !req.body.unit) {
+        security.showLogPropertiesRequired(res, ["temperature", "unit"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            temperature: req.body.temperature,
+            unit: req.body.unit
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
 module.exports = router;
