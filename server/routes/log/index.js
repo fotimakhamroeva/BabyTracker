@@ -268,8 +268,8 @@ Request Body:
 {
     "event_type": "vaccine",
     "event_datetime": 1647676171,
-    "vaccine_name: "4 month-vaccine",
-    "vaccine_detail: "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
+    "vaccine_name": "4 month-vaccine",
+    "vaccine_detail": "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
 }
 */
 router.post('/:baby_id/vaccine', (req,res) => {
