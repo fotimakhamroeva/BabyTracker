@@ -307,4 +307,48 @@ router.post('/:baby_id/vaccine', (req,res) => {
     utils.show201SuccessMessage(res, logData);
 });
 
+/* 
+Request Body:
+{
+    "event_type": "appointment",
+    "event_datetime": 1647676171,
+    "appointment_location": "33 Testers Drive, London UK",
+    "appointment_detail": "3 months with Dr. Mackyla"
+}
+*/
+router.post('/:baby_id/appointment', (req,res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+        security.showBabyInvalid(res);
+        return;
+    }
+    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    if (!areBasicPropertiesProvided) {
+        security.showLogBasicPropertiesRequired(res);
+        return;
+    }
+    if (!req.body.appointment_location || !req.body.appointment_detail) {
+        security.showLogPropertiesRequired(res, ["appointment_location", "appointment_detail"]);
+        return;
+    }
+    const logData = {
+        id: utils.getNewId(Object.keys(logs)),
+        event_type: req.body.event_type,
+        event_detail: {
+            appointment_location: req.body.appointment_location,
+            appointment_detail: req.body.appointment_detail
+        },
+        event_datetime: req.body.event_datetime,
+        baby_id: babyId,
+        created_by: parent.id
+    }
+    logs[logData.id] = logData;
+    utils.show201SuccessMessage(res, logData);
+});
+
 module.exports = router;
