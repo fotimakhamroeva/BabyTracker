@@ -1,31 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
-const users = {
-    "test1@gmail.com": {
-        email:"test1@gmail.com",
-        password:"wwww",
-        first_name: "Tester1",
-        last_name: "Doe"
-    },
-    "test2@gmail.com": {
-        email:"test2@gmail.com",
-        password:"wwww",
-        first_name: "Tester2",
-        last_name: "Doe"
-    },
-    "abc@gmail.com": {
-        email:"abc@gmail.com",
-        password:"wwww",
-        first_name: "Abc",
-        last_name: "Doe"
-    }
-}
+const mock = require('../../utils/mock');
+const users = mock.users;
 
 router.post('/login', (req,res) => {
     const email = req.body.email;
     const password = req.body.password;
-    // const foundPassword = users[email].password;
     const foundUser = users[email];
     const foundPassword = (foundUser) ? foundUser.password : null;
     if (password === foundPassword) {
