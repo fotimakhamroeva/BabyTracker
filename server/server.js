@@ -1,6 +1,7 @@
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
+const CookieSession = require('cookie-session')
 const PORT = 8080;
 const authRoutes = require('./routes/auth')
 
@@ -8,6 +9,11 @@ const authRoutes = require('./routes/auth')
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
+App.use(CookieSession({
+    name: 'BabyTrackerSession',
+    keys: ["BabyTrackerHelpsParentsTrackHealthAndVitalOfBaby"],
+    maxAge: 72 * 60 * 60 * 1000 // 72 hours
+}));
 
 App.use('/api/auth', authRoutes);
 

@@ -29,6 +29,8 @@ router.post('/login', (req,res) => {
     const foundUser = users[email];
     const foundPassword = (foundUser) ? foundUser.password : null;
     if (password === foundPassword) {
+        delete foundUser.password;
+        req.session.user = foundUser;
         res.status(200).json({message:"Success"});
     } else {
         res.status(401).json({message:"Please, check your email or password"});
@@ -42,7 +44,9 @@ router.post('/register', (req,res) => {
         email: req.body.email,
         password: req.body.password,
     }
-    users[req.body.email] = userData;
+    users[userData.email] = userData;
+    delete userData.password;
+    req.session.user = userData;
     res.status(200).json({message:"Success"})
 });
 
