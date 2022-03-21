@@ -1,19 +1,16 @@
 import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
+
 import Button from './Button';
 
 import "./Navbar.scss";
 
 export default function Navbar(props) {
 
-  console.log(props.onClick)
+  const { handleLogin, handleRegister } = props
 
-  const login = function() {
-
-  }
-
-  const register = function() {
-    
-  }
+  let navigate = useNavigate();
 
   if (props.username) {
     return(
@@ -25,8 +22,8 @@ export default function Navbar(props) {
   } else {
     return(
       <nav>
-        <Button confirm onClick={props.onClick}>Login</Button>
-        <Button confirm onClick={props.onClick}>Register</Button>
+        <Button confirm onClick={handleLogin}>Login</Button>
+        <Button confirm onClick={() => navigate("/register")}>Register</Button>
       </nav>
     )
   }

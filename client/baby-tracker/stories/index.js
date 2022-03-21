@@ -7,6 +7,7 @@ import "../src/index.scss";
 
 import Button from "../src/components/Button";
 import Navbar from "../src/components/Navbar";
+import RegistrationPage from '../src/components/RegistrationPage';
 
 storiesOf("Button", module)
   .addParameters({
@@ -24,6 +25,7 @@ storiesOf("Navbar", module)
     backgrounds: [{value: "#FFFFFF"}]
   })
   .add("Logged In", () => <Navbar username="John" onClick={action("logout")}></Navbar>)
-  .add("Not logged in", () => <Navbar onClick={action("login")}></Navbar>)
+  .add("Not logged in", () => <Navbar handleLogin={action("login")} handleRegister={action("register")}></Navbar>)
 
-  
+storiesOf("Registration page", module)
+  .add("Register", () => <RegistrationPage />)

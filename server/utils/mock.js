@@ -35,11 +35,19 @@ const users = {
 const babies = {
     1: {
         id: 1,
-        name: "John Doe Jr."
+        first_name: "John Jr.",
+        last_name: "Doe",
+        date_of_birth: 1647676171,
+        birth_location: "Home",
+        picture_url: "https://images.freeimages.com/images/small-previews/6ec/baby-1519154.jpg"
     },
     2: {
         id: 2,
-        name: "Bob Marley Jr."
+        first_name: "Bob Jr.",
+        last_name: "Marley",
+        date_of_birth: 1647676171,
+        birth_location: "Home",
+        picture_url: "https://images.freeimages.com/images/small-previews/e88/baby-1240460.jpg"
     }
 }
 

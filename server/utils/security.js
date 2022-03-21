@@ -50,6 +50,10 @@ const showLogBasicPropertiesRequired = function(res) {
     showLogPropertiesRequired(res, ["event_type", "event_datetime"]);
 }
 
+const showBabyPropertiesRequired = function(res, properties) {
+    res.status(400).json({ message: `Bad Request. The following 'Baby' propertie(s) required: ${properties}.` });
+}
+
 module.exports = { 
     isBabyYours, 
     getParentFromSession, 
@@ -57,5 +61,6 @@ module.exports = {
     showParentInvalid, 
     areBasicLogPropertiesProvided,
     showLogPropertiesRequired,
-    showLogBasicPropertiesRequired
+    showLogBasicPropertiesRequired,
+    showBabyPropertiesRequired
 }
