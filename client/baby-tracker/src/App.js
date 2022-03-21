@@ -1,5 +1,6 @@
 import React from "react";
 import Button from './components/Button'
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -7,8 +8,7 @@ function App() {
       <header className="App-header">
       </header>
       <body>
-        <Button danger>Cancel</Button>
-        <Button confirm>Login</Button>
+        <Navbar></Navbar>
       </body>
     </div>
   );

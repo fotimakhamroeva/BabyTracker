@@ -2,6 +2,7 @@
 @import "styles/variables.scss";
 
 .button {
+  font-weight: bold;
   border-radius: 1rem;
   border: 0;
   font-size: 1.5rem;
@@ -13,7 +14,7 @@
   border-style: solid;
   border-color: $white;
   color: $white;
-  background-color: $white;
+  background-color: transparent;
 }
 
 .button:hover {

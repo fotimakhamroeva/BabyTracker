@@ -23,7 +23,7 @@ storiesOf("Navbar", module)
   .addParameters({
     backgrounds: [{value: "#FFFFFF"}]
   })
-  .add("Loggen In", () => <Navbar loggedIn username="John"></Navbar>)
-  .add("Not logged in", () => <Navbar></Navbar>)
+  .add("Logged In", () => <Navbar username="John" onClick={action("logout")}></Navbar>)
+  .add("Not logged in", () => <Navbar onClick={action("login")}></Navbar>)
 
   
