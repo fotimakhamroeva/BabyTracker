@@ -5,6 +5,7 @@ const CookieSession = require('cookie-session')
 const PORT = 8080;
 const authRoutes = require('./routes/auth')
 const logRoutes = require('./routes/log')
+const babyRoutes = require('./routes/baby')
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -18,6 +19,7 @@ App.use(CookieSession({
 
 App.use('/api/auth', authRoutes);
 App.use('/api/log', logRoutes);
+App.use('/api/baby', babyRoutes);
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
