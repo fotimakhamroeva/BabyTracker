@@ -6,6 +6,7 @@ import { action } from "@storybook/addon-actions";
 import "../src/index.scss";
 
 import Button from "../src/components/Button";
+import Navbar from "../src/components/Navbar";
 
 storiesOf("Button", module)
   .addParameters({
@@ -17,3 +18,12 @@ storiesOf("Button", module)
   .add("Clickable", () => (
     <Button onClick={action("button-clicked")}>Clickable</Button>
   ))
+
+storiesOf("Navbar", module)
+  .addParameters({
+    backgrounds: [{value: "#FFFFFF"}]
+  })
+  .add("Loggen In", () => <Navbar loggedIn username="John"></Navbar>)
+  .add("Not logged in", () => <Navbar></Navbar>)
+
+  

@@ -1,13 +1,14 @@
+import React from "react";
 import Button from './components/Button'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button></Button>
       </header>
       <body>
-        <Button />
+        <Button danger>Cancel</Button>
+        <Button confirm>Login</Button>
       </body>
     </div>
   );

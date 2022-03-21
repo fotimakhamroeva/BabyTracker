@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/preset-scss": "^1.0.3",
     "axios": "^0.26.0",
     "classnames": "^2.2.6",
@@ -42,7 +43,6 @@
     "@storybook/react": "^6.4.19",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
-    "babel-loader": "^8.0.5",
     "css-loader": "^5.2.7",
     "node-sass": "^4.14.0",
     "prop-types": "^15.8.1",
