@@ -5,6 +5,7 @@ const users = mock.users;
 
 router.post('/login', (req,res) => {
     console.log('login route reached')
+    console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
     const foundUser = users[email];
@@ -21,11 +22,12 @@ router.post('/login', (req,res) => {
 router.post('/register', (req,res) => {
     console.log('register route reached')
     const userData = {
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
+        first_name: req.body.firstName,
+        last_name: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
     }
+    console.log(userData)
     users[userData.email] = userData;
     delete userData.password;
     req.session.user = userData;
