@@ -18,6 +18,7 @@ router.post('/login', (req,res) => {
 });
 
 router.post('/register', (req,res) => {
+    console.log('abc')
     const userData = {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
