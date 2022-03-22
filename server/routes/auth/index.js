@@ -4,6 +4,7 @@ const mock = require('../../utils/mock');
 const users = mock.users;
 
 router.post('/login', (req,res) => {
+    console.log('login route reached')
     const email = req.body.email;
     const password = req.body.password;
     const foundUser = users[email];
@@ -18,7 +19,7 @@ router.post('/login', (req,res) => {
 });
 
 router.post('/register', (req,res) => {
-    console.log('abc')
+    console.log('register route reached')
     const userData = {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
