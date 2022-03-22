@@ -5,7 +5,6 @@ const users = mock.users;
 
 router.post('/login', (req,res) => {
     console.log('login route reached')
-    console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
     const foundUser = users[email];
@@ -13,7 +12,7 @@ router.post('/login', (req,res) => {
     if (password === foundPassword) {
         delete foundUser.password;
         req.session.user = foundUser;
-        res.status(200).json({message:"Success"});
+        return res.status(200).json({message:"Success", user: foundUser});
     } else {
         res.status(401).json({message:"Please, check your email or password"});
     }
