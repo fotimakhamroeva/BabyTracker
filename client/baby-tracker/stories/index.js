@@ -28,4 +28,4 @@ storiesOf("Navbar", module)
   .add("Not logged in", () => <Navbar handleLogin={action("login")} handleRegister={action("register")}></Navbar>)
 
 storiesOf("Registration page", module)
-  .add("Register", () => <RegistrationPage />)
+  .add("Register", () => <RegistrationPage register={action("register")}/>)

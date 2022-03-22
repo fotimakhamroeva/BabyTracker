@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from 'axios'
 
-import Navbar from './Navbar'
 import Button from './Button'
+
+import './RegistrationPage.scss'
 
 export default function RegistrationPage(props) {
    const [firstName, setFirstName] = useState('')
@@ -29,7 +30,8 @@ export default function RegistrationPage(props) {
 
   return(
    <>
-   <form>
+   <h1>Register new account here</h1>
+   <form id='registration-form'>
    <input
          className="registation"
          firstName="firstName"
@@ -58,7 +60,7 @@ export default function RegistrationPage(props) {
          placeholder="Enter password"
          onBlur={(e) => setPassword(e.target.value)}
       />
-      <Button onClick={(e) => register(e)}>Register!</Button>
+      <Button confirm onClick={(e) => register(e)}>Register!</Button>
     </form>
    </>
   )
