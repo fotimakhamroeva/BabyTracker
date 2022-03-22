@@ -8,6 +8,8 @@ import "../src/index.scss";
 import Button from "../src/components/Button";
 import Navbar from "../src/components/Navbar";
 import RegistrationPage from '../src/components/RegistrationPage';
+import BabyList from '../src/components/BabyList';
+import BabyListItem from '../src/components/BabyListItem'
 
 storiesOf("Button", module)
   .addParameters({
@@ -29,3 +31,10 @@ storiesOf("Navbar", module)
 
 storiesOf("Registration page", module)
   .add("Register", () => <RegistrationPage register={action("register")}/>)
+  
+storiesOf("Baby List item", module)
+  .add("item", () => <BabyListItem name='John' image='example.src'/>)
+  .add("empty item", () => <BabyListItem />)
+
+storiesOf("Baby List", module)
+  .add("BabyList", () => <BabyList babies={[{name: 'John', image: 'examplepicture'}]}/>)
