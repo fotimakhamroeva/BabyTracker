@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/mock');
-// const users = mock.users;
 
 router.post('/login', (req,res) => {
     console.log(users)

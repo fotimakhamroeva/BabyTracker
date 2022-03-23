@@ -10,6 +10,8 @@ export default function RegistrationPage(props) {
    
    const { email, setUserEmail } = useContext(UserContext)
 
+   const { firstName, setUserFirstName } = useContext(UserContext)
+
    const [user, setUser] = useState({
       email: '',
       password: ''
@@ -19,7 +21,6 @@ export default function RegistrationPage(props) {
       const name = e.target.name
       const value = e.target.value
       setUser(prev => ({...user, [name]: value}))
-      console.log(user)
    }
 
    const handleSubmit = () => {
@@ -32,8 +33,10 @@ export default function RegistrationPage(props) {
          withCredentials: true,
       })
       .then((result) => { 
-         console.log(result.data.user.email)
+         console.log("first name:", result.data.user.first_name)
+         console.log("email:", result.data.user.email)
          setUserEmail(result.data.user.email)
+         setUserFirstName(result.data.first_name)
       })
       .catch((error) => {
          console.log(error)

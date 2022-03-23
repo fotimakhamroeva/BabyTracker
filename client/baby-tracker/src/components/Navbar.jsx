@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Routes, Route, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from "../context/userContext";
 
@@ -9,11 +8,14 @@ import "./Navbar.scss";
 
 export default function Navbar(props) {
 
-  const { email } = useContext(UserContext)
+  const { email, firstName } = useContext(UserContext)
 
   const { handleLogin, handleRegister } = props
 
   let navigate = useNavigate();
+  
+  console.log("Navbar first name:", firstName)
+  console.log("Navbar email:", email)
 
   if (email) {
     return(
