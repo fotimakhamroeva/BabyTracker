@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from "../context/userContext";
 
 import Button from './Button';
 
@@ -8,14 +9,16 @@ import "./Navbar.scss";
 
 export default function Navbar(props) {
 
+  const { email } = useContext(UserContext)
+
   const { handleLogin, handleRegister } = props
 
   let navigate = useNavigate();
 
-  if (props.username) {
+  if (email) {
     return(
       <nav>
-        <span className='username'>Hello, {props.username}!</span>
+        <span className='username'>Hello, {email}!</span>
         <Button danger onClick={props.onClick}>Logout</Button>
       </nav>
     )

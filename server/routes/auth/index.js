@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const mock = require('../../utils/mock');
-const users = mock.users;
+const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/mock');
+// const users = mock.users;
 
 router.post('/login', (req,res) => {
+    console.log(users)
     const email = req.body.email;
     const password = req.body.password;
     const foundUser = users[email];
@@ -12,7 +13,7 @@ router.post('/login', (req,res) => {
         let userToUse = JSON.parse(JSON.stringify(foundUser));
         delete userToUse.password;
         req.session.user = userToUse;
-        return res.status(200).json({ message : "Login successful." });
+        return res.status(200).json({ message : "Login successful.", user: userToUse });
     } else {
         return res.status(401).json({ message : "Please, check your email or password." });
     }

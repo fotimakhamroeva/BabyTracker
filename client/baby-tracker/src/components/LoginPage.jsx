@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios'
+import { UserContext } from '../context/userContext'
 
 import Button from './Button'
 
 import './LoginPage.scss'
 
 export default function RegistrationPage(props) {
+   
+   const { email, setUserEmail } = useContext(UserContext)
 
    const [user, setUser] = useState({
       email: '',
@@ -29,12 +32,12 @@ export default function RegistrationPage(props) {
          withCredentials: true,
       })
       .then((result) => { 
-         console.log(result.data)
+         console.log(result.data.user.email)
+         setUserEmail(result.data.user.email)
       })
       .catch((error) => {
          console.log(error)
       })
-      console.log('abc')
    }
 
    return(
