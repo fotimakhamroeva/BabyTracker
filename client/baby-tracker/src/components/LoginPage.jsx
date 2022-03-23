@@ -8,9 +8,9 @@ import './LoginPage.scss'
 
 export default function RegistrationPage(props) {
    
-   const { email, setUserEmail } = useContext(UserContext)
+   const { userContextEmail, setUserEmail } = useContext(UserContext)
 
-   const { firstName, setUserFirstName } = useContext(UserContext)
+   const { userContextFirstName, setUserFirstName } = useContext(UserContext)
 
    const [user, setUser] = useState({
       email: '',
@@ -33,10 +33,11 @@ export default function RegistrationPage(props) {
          withCredentials: true,
       })
       .then((result) => { 
-         console.log("first name:", result.data.user.first_name)
-         console.log("email:", result.data.user.email)
-         setUserEmail(result.data.user.email)
-         setUserFirstName(result.data.first_name)
+         const { email:emailFromServer, first_name} = result.data.user
+         // console.log("LoginPage first name:", result.data.user.first_name)
+         // console.log("LoginPage email:", result.data.user.email)
+         setUserEmail(emailFromServer)
+         setUserFirstName(first_name)
       })
       .catch((error) => {
          console.log(error)
