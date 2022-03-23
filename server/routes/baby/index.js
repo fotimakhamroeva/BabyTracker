@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const security = require('../../utils/security');
 const utils = require('../../utils/utils');
-const mock = require('../../utils/mock');
-const babies = mock.babies;
-const parentBabies = mock.parentBabies;
+const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/mock');
 
 router.get('/', (req, res) => {
     const parent = security.getParentFromSession(req);
