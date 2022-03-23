@@ -34,7 +34,6 @@ export default function RegistrationPage(props) {
       .catch((error) => {
          console.log(error)
       })
-      console.log('abc')
    }
    
    return(
