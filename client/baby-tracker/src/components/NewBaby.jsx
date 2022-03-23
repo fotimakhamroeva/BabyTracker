@@ -18,7 +18,7 @@ export default function NewBaby(props) {
     const name = e.target.name
     const value = e.target.value
     setBaby(prev => ({...baby, [name]: value}))
-    console.log(baby)
+    // console.log(baby)
   }
 
   const handleSubmit = () => {

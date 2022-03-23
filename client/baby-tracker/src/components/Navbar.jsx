@@ -8,19 +8,19 @@ import "./Navbar.scss";
 
 export default function Navbar(props) {
 
-  const { email, firstName } = useContext(UserContext)
+  const { userContextEmail, userContextFirstName } = useContext(UserContext)
 
   const { handleLogin, handleRegister } = props
 
   let navigate = useNavigate();
   
-  console.log("Navbar first name:", firstName)
-  console.log("Navbar email:", email)
+  console.log("Navbar first name:", userContextFirstName)
+  console.log("Navbar email:", userContextEmail)
 
-  if (email) {
+  if (userContextFirstName) {
     return(
       <nav>
-        <span className='username'>Hello, {email}!</span>
+        <span className='username'>Hello, {userContextFirstName}!</span>
         <Button danger onClick={props.onClick}>Logout</Button>
       </nav>
     )
