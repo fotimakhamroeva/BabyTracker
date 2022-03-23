@@ -32,4 +32,9 @@ router.post('/register', (req,res) => {
     return res.status(200).json({ message : "Register successful." })
 });
 
+router.post('/logout', (req, res) => {
+    req.session = null;
+    return res.status(200).json({ message : "Logout successful." })
+});
+
 module.exports = router;
