@@ -25,7 +25,9 @@ export default function RegistrationPage(props) {
          console.log('Empty values!')
          return
       }
-      axios.post('http://localhost:8080/api/auth/login', user)
+      axios.post('http://localhost:8080/api/auth/login', user, {
+         withCredentials: true,
+      })
       .then((result) => { 
          console.log(result.data)
       })

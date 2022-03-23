@@ -9,7 +9,11 @@ const logRoutes = require('./routes/log')
 const babyRoutes = require('./routes/baby')
 
 // Express Configuration
-App.use(Cors())
+App.use(Cors({
+  origin: "http://localhost:3000",
+  methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
+  credentials: true,
+}))
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static('public'));
