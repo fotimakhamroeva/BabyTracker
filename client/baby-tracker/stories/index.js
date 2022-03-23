@@ -10,6 +10,7 @@ import Navbar from "../src/components/Navbar";
 import RegistrationPage from '../src/components/RegistrationPage';
 import BabyList from '../src/components/BabyList';
 import BabyListItem from '../src/components/BabyListItem'
+import NewBaby from '../src/components/NewBaby';
 
 storiesOf("Button", module)
   .addParameters({
@@ -38,3 +39,6 @@ storiesOf("Baby List item", module)
 
 storiesOf("Baby List", module)
   .add("BabyList", () => <BabyList babies={[{name: 'John', image: 'examplepicture'}]}/>)
+
+storiesOf("New baby form", module)
+  .add("New baby", () => <NewBaby />)

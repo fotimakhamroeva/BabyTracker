@@ -1,0 +1,14 @@
+@import "styles/mixins.scss";
+@import "styles/variables.scss";
+
+.baby-list__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 1px;
+  border-color: black;
+  height: 8rem;
+  width: 10rem;
+  text-align: center;
+  margin: 1rem;
+}

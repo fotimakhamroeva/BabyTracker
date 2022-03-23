@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 
+import "./BabyListItem.scss";
+
 export default function BabyListItem(props) {
 
   const { name, image } = props
@@ -18,7 +20,9 @@ export default function BabyListItem(props) {
     )
   } else {
     return(
-      <h3>Add new baby!</h3>
+      <div className={babyClass}>
+        <h3>Add new baby!</h3>
+      </div>
     )
   }
 }
