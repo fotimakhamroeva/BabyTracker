@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios'
+import { UserContext } from '../context/userContext'
 
 import Button from './Button'
 
 import './LoginPage.scss'
 
 export default function RegistrationPage(props) {
+   
+   const { userContextEmail, setUserEmail } = useContext(UserContext)
+
+   const { userContextFirstName, setUserFirstName } = useContext(UserContext)
 
    const [user, setUser] = useState({
       email: '',
@@ -16,7 +21,6 @@ export default function RegistrationPage(props) {
       const name = e.target.name
       const value = e.target.value
       setUser(prev => ({...user, [name]: value}))
-      console.log(user)
    }
 
    const handleSubmit = () => {
@@ -29,12 +33,15 @@ export default function RegistrationPage(props) {
          withCredentials: true,
       })
       .then((result) => { 
-         console.log(result.data)
+         const { email:emailFromServer, first_name} = result.data.user
+         // console.log("LoginPage first name:", result.data.user.first_name)
+         // console.log("LoginPage email:", result.data.user.email)
+         setUserEmail(emailFromServer)
+         setUserFirstName(first_name)
       })
       .catch((error) => {
          console.log(error)
       })
-      console.log('abc')
    }
 
    return(
