@@ -4,33 +4,32 @@ const mock = require('../../utils/mock');
 const users = mock.users;
 
 router.post('/login', (req,res) => {
-    console.log('login route reached')
     const email = req.body.email;
     const password = req.body.password;
     const foundUser = users[email];
     const foundPassword = (foundUser) ? foundUser.password : null;
     if (password === foundPassword) {
-        delete foundUser.password;
-        req.session.user = foundUser;
-        return res.status(200).json({message:"Success", user: foundUser});
+        let userToUse = JSON.parse(JSON.stringify(foundUser));
+        delete userToUse.password;
+        req.session.user = userToUse;
+        return res.status(200).json({ message : "Login successful." });
     } else {
-        res.status(401).json({message:"Please, check your email or password"});
+        return res.status(401).json({ message : "Please, check your email or password." });
     }
 });
 
 router.post('/register', (req,res) => {
-    console.log('register route reached')
     const userData = {
         first_name: req.body.firstName,
         last_name: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
     }
-    console.log(userData)
     users[userData.email] = userData;
-    delete userData.password;
-    req.session.user = userData;
-    res.status(200).json({message:"Success"})
+    let userToUse = JSON.parse(JSON.stringify(userData));
+    delete userToUse.password;
+    req.session.user = userToUse;
+    return res.status(200).json({ message : "Register successful." })
 });
 
 module.exports = router;
