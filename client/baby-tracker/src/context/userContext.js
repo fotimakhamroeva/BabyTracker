@@ -4,7 +4,9 @@ const defaultState = {
   email: '', 
   setUserEmail: () => {},
   firstName: '',
-  setUserFirstName: () => {}
+  setUserFirstName: () => {},
+  parentId: null,
+  setUserParentId: () => {}
 };
 
 export const UserContext = createContext(
@@ -25,6 +27,7 @@ export const UserContextProvider = ({children}) => {
   const setUserFirstName = (firstName) => {
     setuserContextFirstName(firstName)
   }
+
 
   return(
     <UserContext.Provider value={{ userContextEmail, setUserEmail, userContextFirstName, setUserFirstName }}>
