@@ -47,7 +47,7 @@ export default function RegistrationPage(props) {
    }
 
    return(
-      <>
+      <section className="section">
       <h1>Login into your account</h1>
       <form id='login-form' onSubmit={(e) => e.preventDefault()}>
       <input
@@ -74,6 +74,6 @@ export default function RegistrationPage(props) {
             Login!
          </Button>
       </form>
-   </>
+   </section>
    )
 }

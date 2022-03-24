@@ -35,8 +35,8 @@ export default function Navbar(props) {
   } else {
     return(
       <nav>
-        <Button confirm onClick={() => navigate("/login")}>Login</Button>
-        <Button confirm onClick={() => navigate("/register")}>Register</Button>
+        <Button onClick={() => navigate("/login")}>Login</Button>
+        <Button onClick={() => navigate("/register")}>Register</Button>
       </nav>
     )
   }

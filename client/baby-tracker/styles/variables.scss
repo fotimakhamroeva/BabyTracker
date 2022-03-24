@@ -8,10 +8,33 @@ $black: #000;
 
 $dark-background: #222f3e;
 
+$theme-background: lavender;
+$theme-primary: darkcyan;
+$theme-secondary: gray;
+$theme-danger: #ee5253;
+$theme-error: #ff9f43;
+$theme-text-on-primary: white;
+$theme-text-on-secondary: white;
+
 $weeks-colors: #54a0ff, #48dbfb, #1dd1a1, #5f27cd;
 $booked-color: #54a0ff;
 $danger-color: #ee5253;
 $error-color: #ff9f43;
-$confirm-color: #10ac84;
+$confirm-color: darkcyan;
+
+$default-button-up: white;
+$default-button-down: $theme-primary;
+$default-button-text-up: $theme-primary;
+$default-button-text-down: $theme-text-on-primary;
+
+$confirm-button-up: $theme-primary;
+$confirm-button-down: rgb(0, 75, 75);
+$confirm-button-text-up: $theme-text-on-primary;
+$confirm-button-text-down: $theme-text-on-primary;
+
+$danger-button-up: $theme-danger;
+$danger-button-down: #8e2525;
+$danger-button-text-up: $theme-text-on-primary;
+$danger-button-text-down: $theme-text-on-primary;
 
 $spacing: 2rem;
