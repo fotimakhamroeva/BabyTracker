@@ -49,147 +49,36 @@ router.get('/', (req, res) => {
 });
 
 /* 
-Request Body:
+Example for Head size:
 {
     "event_type": "head",
     "event_datetime": 1647676171,
-    "circumference": 35,
-    "unit": "cm"
+    "event_amount": 35, // circumference
+    "event_unit": "cm"
 }
-*/
-router.post('/:baby_id/head', (req,res) => {
-    const parent = security.getParentFromSession(req);
-    if (!parent) {
-        security.showParentInvalid(res);
-        return;
-    }
-    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
-    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
-        security.showBabyInvalid(res);
-        return;
-    }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
-    if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.circumference || !req.body.unit) {
-        security.showLogPropertiesRequired(res, ["circumference", "unit"]);
-        return;
-    }
-    const logData = {
-        id: utils.getNewId(Object.keys(logs)),
-        event_type: req.body.event_type,
-        event_detail: {
-            circumference: req.body.circumference,
-            unit: req.body.unit
-        },
-        event_datetime: req.body.event_datetime,
-        baby_id: babyId,
-        created_by: parent.id
-    }
-    logs[logData.id] = logData;
-    utils.show201SuccessMessage(res, logData);
-});
-
-/* 
-Request Body:
+Example for Height:
 {
     "event_type": "height",
     "event_datetime": 1647676171,
-    "height": 56,
-    "unit": "cm"
+    "event_amount": 56, // height
+    "event_unit": "cm"
 }
-*/
-router.post('/:baby_id/height', (req,res) => {
-    const parent = security.getParentFromSession(req);
-    if (!parent) {
-        security.showParentInvalid(res);
-        return;
-    }
-    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
-    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
-        security.showBabyInvalid(res);
-        return;
-    }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
-    if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.height || !req.body.unit) {
-        security.showLogPropertiesRequired(res, ["height", "unit"]);
-        return;
-    }
-    const logData = {
-        id: utils.getNewId(Object.keys(logs)),
-        event_type: req.body.event_type,
-        event_detail: {
-            height: req.body.height,
-            unit: req.body.unit
-        },
-        event_datetime: req.body.event_datetime,
-        baby_id: babyId,
-        created_by: parent.id
-    }
-    logs[logData.id] = logData;
-    utils.show201SuccessMessage(res, logData);
-});
-
-/* 
-Request Body:
+Example for Weight:
 {
     "event_type": "weight",
     "event_datetime": 1647676171,
-    "weight": 3.5,
-    "unit": "kg"
+    "event_amount": 3.5, // weight
+    "event_unit": "kg"
 }
-*/
-router.post('/:baby_id/weight', (req,res) => {
-    const parent = security.getParentFromSession(req);
-    if (!parent) {
-        security.showParentInvalid(res);
-        return;
-    }
-    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
-    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
-        security.showBabyInvalid(res);
-        return;
-    }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
-    if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.weight || !req.body.unit) {
-        security.showLogPropertiesRequired(res, ["weight", "unit"]);
-        return;
-    }
-    const logData = {
-        id: utils.getNewId(Object.keys(logs)),
-        event_type: req.body.event_type,
-        event_detail: {
-            weight: req.body.weight,
-            unit: req.body.unit
-        },
-        event_datetime: req.body.event_datetime,
-        baby_id: babyId,
-        created_by: parent.id
-    }
-    logs[logData.id] = logData;
-    utils.show201SuccessMessage(res, logData);
-});
-
-/* 
-Request Body:
+Example for Temperature:
 {
     "event_type": "temperature",
     "event_datetime": 1647676171,
-    "temperature": 36.5,
-    "unit": "C"
+    "event_amount": 36.5, // temperature
+    "event_unit": "C"
 }
 */
-router.post('/:baby_id/temperature', (req,res) => {
+router.post('/:baby_id/measurement', (req,res) => {
     const parent = security.getParentFromSession(req);
     if (!parent) {
         security.showParentInvalid(res);
@@ -200,22 +89,16 @@ router.post('/:baby_id/temperature', (req,res) => {
         security.showBabyInvalid(res);
         return;
     }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    const areBasicPropertiesProvided = security.areBasicMeasurementLogPropertiesProvided(req);
     if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.temperature || !req.body.unit) {
-        security.showLogPropertiesRequired(res, ["temperature", "unit"]);
+        security.showMeasurementLogBasicPropertiesRequired(res);
         return;
     }
     const logData = {
         id: utils.getNewId(Object.keys(logs)),
         event_type: req.body.event_type,
-        event_detail: {
-            temperature: req.body.temperature,
-            unit: req.body.unit
-        },
+        event_amount: req.body.event_amount,
+        event_unit: req.body.event_unit,
         event_datetime: req.body.event_datetime,
         baby_id: babyId,
         created_by: parent.id
@@ -224,104 +107,31 @@ router.post('/:baby_id/temperature', (req,res) => {
     utils.show201SuccessMessage(res, logData);
 });
 
+
 /* 
-Request Body:
+Example for Medicine:
 {
     "event_type": "medicine",
     "event_datetime": 1647676171,
-    "medicine_name": "Tylenol Syrup",
-    "medicine_dose": "5 mg"
+    "event_name": "Tylenol Syrup",
+    "event_detail": "5 mg"
 }
-*/
-router.post('/:baby_id/medicine', (req,res) => {
-    const parent = security.getParentFromSession(req);
-    if (!parent) {
-        security.showParentInvalid(res);
-        return;
-    }
-    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
-    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
-        security.showBabyInvalid(res);
-        return;
-    }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
-    if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.medicine_name || !req.body.medicine_dose) {
-        security.showLogPropertiesRequired(res, ["medicine_name", "medicine_dose"]);
-        return;
-    }
-    const logData = {
-        id: utils.getNewId(Object.keys(logs)),
-        event_type: req.body.event_type,
-        event_detail: {
-            medicine_name: req.body.medicine_name,
-            medicine_dose: req.body.medicine_dose
-        },
-        event_datetime: req.body.event_datetime,
-        baby_id: babyId,
-        created_by: parent.id
-    }
-    logs[logData.id] = logData;
-    utils.show201SuccessMessage(res, logData);
-});
-
-/* 
-Request Body:
+Example for Vaccine:
 {
     "event_type": "vaccine",
     "event_datetime": 1647676171,
-    "vaccine_name": "4 month-vaccine",
-    "vaccine_detail": "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
+    "event_name": "4 month-vaccine",
+    "event_detail": "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
 }
-*/
-router.post('/:baby_id/vaccine', (req,res) => {
-    const parent = security.getParentFromSession(req);
-    if (!parent) {
-        security.showParentInvalid(res);
-        return;
-    }
-    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
-    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
-        security.showBabyInvalid(res);
-        return;
-    }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
-    if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.vaccine_name || !req.body.vaccine_detail) {
-        security.showLogPropertiesRequired(res, ["vaccine_name", "vaccine_detail"]);
-        return;
-    }
-    const logData = {
-        id: utils.getNewId(Object.keys(logs)),
-        event_type: req.body.event_type,
-        event_detail: {
-            vaccine_name: req.body.vaccine_name,
-            vaccine_detail: req.body.vaccine_detail
-        },
-        event_datetime: req.body.event_datetime,
-        baby_id: babyId,
-        created_by: parent.id
-    }
-    logs[logData.id] = logData;
-    utils.show201SuccessMessage(res, logData);
-});
-
-/* 
-Request Body:
+Example for Appointment:
 {
     "event_type": "appointment",
     "event_datetime": 1647676171,
-    "appointment_location": "33 Testers Drive, London UK",
-    "appointment_detail": "3 months with Dr. Mackyla"
+    "event_name": "3 months with Dr. Mackyla"
+    "event_detail": "33 Testers Drive, London UK",
 }
 */
-router.post('/:baby_id/appointment', (req,res) => {
+router.post('/:baby_id/event', (req,res) => {
     const parent = security.getParentFromSession(req);
     if (!parent) {
         security.showParentInvalid(res);
@@ -332,22 +142,16 @@ router.post('/:baby_id/appointment', (req,res) => {
         security.showBabyInvalid(res);
         return;
     }
-    const areBasicPropertiesProvided = security.areBasicLogPropertiesProvided(req);
+    const areBasicPropertiesProvided = security.areBasicEventLogPropertiesProvided(req);
     if (!areBasicPropertiesProvided) {
-        security.showLogBasicPropertiesRequired(res);
-        return;
-    }
-    if (!req.body.appointment_location || !req.body.appointment_detail) {
-        security.showLogPropertiesRequired(res, ["appointment_location", "appointment_detail"]);
+        security.showEventLogBasicPropertiesRequired(res);
         return;
     }
     const logData = {
         id: utils.getNewId(Object.keys(logs)),
         event_type: req.body.event_type,
-        event_detail: {
-            appointment_location: req.body.appointment_location,
-            appointment_detail: req.body.appointment_detail
-        },
+        event_name: req.body.event_name,
+        event_detail: req.body.event_detail,
         event_datetime: req.body.event_datetime,
         baby_id: babyId,
         created_by: parent.id
