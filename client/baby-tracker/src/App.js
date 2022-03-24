@@ -21,6 +21,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/newbaby" element={<NewBaby />} />
           <Route path="/user" element={<BabyList />} />
+          <Route path="/newbaby" element={<NewBaby />} />
         </Routes>
       </UserContextProvider>
     </div>

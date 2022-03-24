@@ -18,7 +18,6 @@ export default function NewBaby(props) {
     const name = e.target.name
     const value = e.target.value
     setBaby(prev => ({...baby, [name]: value}))
-    // console.log(baby)
   }
 
   const handleSubmit = () => {
@@ -27,7 +26,9 @@ export default function NewBaby(props) {
       console.log('Empty values!')
       return
     }
-    axios.post('http://localhost:8080/api/baby/', baby)
+    axios.post('http://localhost:8080/api/baby/', baby, {
+      withCredentials: true,
+    })
     .then((result) => { 
       console.log(result.data)
       })

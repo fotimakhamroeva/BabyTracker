@@ -1,44 +1,43 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 import BabyListItem from './BabyListItem';
 
 export default function BabyList(props) {
+
+  let navigate = useNavigate();
 
   const [babies, setBabies] = useState([])
 
   let babyListItems = []
 
   useEffect(() => {
-    Promise.all(
-      axios.get("http://localhost:8080/api/baby/", {
-        withCredentials: true
-      })
-      .then((result) => {
-        console.log('babies:', result.data)
-        setBabies(result.data)
-      })
-    )
+    axios.get("http://localhost:8080/api/baby/", {
+      withCredentials: true
+    })
+    .then((result) => {
+      setBabies(result.data)
+    })
   }, [])
 
-  // console.log('babies:', babies)
 
 
   babyListItems = babies.map((baby) => {
-    console.log('correctly rendered name:', baby.first_name)
     return(
       <BabyListItem
         name={baby.first_name}
-        image={baby.image}
+        image={baby.picture_url}
       />
     )
   })
 
+
   return(
     <ul>
       {babyListItems}
-      <BabyListItem />
+      <BabyListItem goToNewBabyPage={() => navigate("/newbaby")}/>
     </ul>
   )
 }
