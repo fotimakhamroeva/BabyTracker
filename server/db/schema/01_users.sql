@@ -1,42 +1,41 @@
-DROP TABLE IF EXISTS parents CASCADE;
+DROP TABLE IF EXISTS parent CASCADE;
 DROP TABLE IF EXISTS baby CASCADE;
 DROP TABLE IF EXISTS parent_baby CASCADE;
-DROP TABLE IF EXISTS LOGS CASCADE;
+DROP TABLE IF EXISTS log CASCADE;
 
 
-CREATE TABLE parents (
-  parent_id SERIAL PRIMARY KEY NOT NULL,
+CREATE TABLE parent(
+  id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255),
-  email_id VARCHAR(255) NOT NULL UNIQUE,
-  is_authenticated BOOLEAN DEFAULT false
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
 );
 
 
-CREATE TABLE baby (
-  baby_id SERIAL PRIMARY KEY NOT NULL,
+CREATE TABLE baby(
+  id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255),
-  date_of_birth DATE,
-  is_authenticated BOOLEAN DEFAULT false
-
-)
+  date_of_birth TIMESTAMP,
+  born_at VARCHAR(255),
+  picture_url VARCHAR(255)
+);
 
 CREATE TABLE parent_baby (
-  parent_baby_id SERIAL PRIMARY KEY NOT NULL,
-  FOREIGN KEY (baby_id) REFERENCES baby(baby_id),
-  FOREIGN KEY (parent_id) REFERENCES parents(parent_id),
+  id SERIAL PRIMARY KEY NOT NULL,
+  babyID INT REFERENCES baby(id),
+  createdBY INT REFERENCES parent(id)
+);
 
-)
-
-CREATE TABLE LOGS (
-  log_id SERIAL PRIMARY KEY NOT NULL,
+CREATE TABLE log (
+  id SERIAL PRIMARY KEY NOT NULL,
   event_type VARCHAR(255) NOT NULL,
-  event_detail VARCHAR(255) NOT NULL,
+  event_detail VARCHAR NOT NULL,
   event_datetime DATE,
-  FOREIGN KEY (baby_id) REFERENCES baby(baby_id),
-  FOREIGN KEY (parent_id) REFERENCES parents(parent_id),
-)
+  babyID INT REFERENCES baby(id),
+  createdBY INT REFERENCES parent(id)
+);
 
 
 
