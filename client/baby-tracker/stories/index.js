@@ -11,6 +11,8 @@ import RegistrationPage from '../src/components/RegistrationPage';
 import BabyList from '../src/components/BabyList';
 import BabyListItem from '../src/components/BabyListItem'
 import NewBaby from '../src/components/NewBaby';
+import LogCalendar from '../src/components/LogCalendar';
+import LogList from '../src/components/LogList';
 
 storiesOf("Button", module)
   .addParameters({
@@ -42,3 +44,7 @@ storiesOf("Baby List", module)
 
 storiesOf("New baby form", module)
   .add("New baby", () => <NewBaby />)
+
+storiesOf("Log List", module)
+  .add("Calendar", () => <LogCalendar />)
+  .add("List", () => <LogList />)
