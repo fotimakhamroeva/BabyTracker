@@ -2,14 +2,9 @@ const express = require('express');
 const router = express.Router();
 const security = require('../../utils/security');
 const utils = require('../../utils/utils');
-const mock = require('../../utils/mock');
-const users = mock.users;
-const parentBabies = mock.parentBabies;
-const babies = mock.babies;
-const logs = mock.logs
+const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/mock');
 
 router.get('/', (req, res) => {
-    // todo filter by date (year and month)
     const parent = security.getParentFromSession(req);
     if (!parent) {
         security.showParentInvalid(res);
@@ -23,13 +18,23 @@ router.get('/', (req, res) => {
             return;
         }
     }
+    const dateFilter = req.query.date_filter;
+    
     const logsToReturn = [];
     for (const id in logs) {
         const log = logs[id];
         if (log.created_by === parent.id) {
             let add = false;
-            if (babyId) {
+            if (dateFilter && babyId) {
+                if (utils.doesLogMatchDateFilter(log, dateFilter) && log.baby_id === babyId) {
+                    add = true;
+                }
+            } else if (babyId) {
                 if (log.baby_id === babyId) {
+                    add = true;
+                }
+            } else if (dateFilter) {
+                if (utils.doesLogMatchDateFilter(log, dateFilter)) {
                     add = true;
                 }
             } else {
