@@ -47,6 +47,9 @@ storiesOf("New baby form", module)
   .add("New baby", () => <NewBaby />)
 
 storiesOf("Log List", module)
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "aliceblue", default: true }]
+  })
   .add("Calendar", () => <LogCalendar />)
   .add("List", () => <LogList />)
 

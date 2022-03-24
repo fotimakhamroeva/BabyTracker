@@ -30,7 +30,7 @@ export default function LogList(props) {
         })
       }, [selectedDate]);
     return(
-        <section className="log-list-section">
+        <section className="section log-list-section">
             <LogCalendar 
                 onChoosenDate={setSelectedDate} 
                 choosenDate={selectedDate} />
