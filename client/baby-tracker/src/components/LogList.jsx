@@ -1,38 +1,45 @@
 import React, { useState } from "react";
 import "./LogList.scss";
 import LogCalendar from './LogCalendar'
+import LogListItem from "./LogListItem";
 import axios from 'axios'
 
 
 export default function LogList(props) {
-    const updateSelectedMonth = (value) => {
-        // Sun May 01 2022 00:00:00 GMT-0400 as Date
-        setSelectedMonth(value);
-        axios.get('http://localhost:8080/api/log', {
-            withCredentials: true,
-         })
-         .then((result) => { 
-            console.log(result.data);
-            setSelectedLogData(result.data);
-         })
-         .catch((error) => {
-            console.log(error)
-         })
-    }
-    const [selectedMonth, setSelectedMonth] = useState(new Date());
-    const [selectedLogData, setSelectedLogData] = useState([]);
-    const logDataItems = selectedLogData.map(log => 
-        <h4 key={log.id}>{log.event_datetime}: ({log.event_type}) {JSON.stringify(log.event_detail)}</h4>
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedLog, setSelectedLog] = useState([]);
+    const logListItems = selectedLog.map(log => 
+        <LogListItem log={log} />
     )
+    React.useEffect(() => {
+        // Sun May 01 2022 00:00:00 GMT-0400 as Date
+        axios.get('http://localhost:8080/api/log?date_filter=' + selectedDate, {
+           withCredentials: true,
+        })
+        .then((result) => { 
+           setSelectedLog(result.data);
+        })
+        .catch((error) => {
+            setSelectedLog([]);
+            //console.log(error)
+        })
+      }, [selectedDate]);
     return(
-        <div>
+        <section className="log-list-section">
             <LogCalendar 
-                onChoosenDate={updateSelectedMonth} 
-                choosenDate={selectedMonth} />
-            <h2>{selectedMonth.toString()}</h2>
-            <ul>
-                {logDataItems}
-            </ul>
-        </div>
+                onChoosenDate={setSelectedDate} 
+                choosenDate={selectedDate} />
+            <h3 className="log-list-heading my-3">Log History ({monthNames[selectedDate.getMonth()]} {selectedDate.getFullYear()})</h3>
+            <ul className="list-group">
+            { (logListItems.length > 0) 
+            ? 
+                logListItems
+            : 
+                <li className="list-group-item log-list-empty">No logs found for {monthNames[selectedDate.getMonth()]}</li>
+            }
+            </ul> 
+        </section>
     )
 }

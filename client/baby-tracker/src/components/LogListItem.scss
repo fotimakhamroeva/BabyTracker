@@ -1,0 +1,14 @@
+@import "styles/mixins.scss";
+@import "styles/variables.scss";
+
+.log-list-item-time {
+    color:darkcyan;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.log-list-item-type {
+    color:rgb(106, 106, 106);
+    text-transform: capitalize;
+    font-weight: bold;
+}
