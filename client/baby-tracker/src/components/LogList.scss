@@ -1,0 +1,19 @@
+@import "styles/mixins.scss";
+@import "styles/variables.scss";
+@import "../../styles/global.scss";
+
+.log-list-section {
+    width: 400px;
+}
+
+.log-list-empty {
+    width: 100%;
+    background-color: aquamarine;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.log-list-heading {
+    color: darkcyan;
+}
