@@ -18,8 +18,11 @@ export default function LogList(props) {
         axios.get('http://localhost:8080/api/log?date_filter=' + selectedDate, {
            withCredentials: true,
         })
-        .then((result) => { 
-           setSelectedLog(result.data);
+        .then((result) => {
+            result.data.sort(function (a, b) {
+                return a.event_datetime - b.event_datetime;
+            });
+            setSelectedLog(result.data);
         })
         .catch((error) => {
             setSelectedLog([]);
