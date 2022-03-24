@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
+import { useNavigate } from "react-router-dom";
 
 import Button from './Button'
 
 import './LoginPage.scss'
 
 export default function RegistrationPage(props) {
+
+   let navigate = useNavigate();
    
    const { userContextEmail, setUserEmail } = useContext(UserContext)
 
@@ -34,10 +37,10 @@ export default function RegistrationPage(props) {
       })
       .then((result) => { 
          const { email:emailFromServer, first_name} = result.data.user
-         // console.log("LoginPage first name:", result.data.user.first_name)
-         // console.log("LoginPage email:", result.data.user.email)
+         console.log(result.data.user)
          setUserEmail(emailFromServer)
          setUserFirstName(first_name)
+         navigate("/user")
       })
       .catch((error) => {
          console.log(error)
@@ -65,7 +68,12 @@ export default function RegistrationPage(props) {
          value={user.password}
          onChange={handleChange}
       />
-         <Button confirm onClick={handleSubmit}>Login!</Button>
+         <Button 
+            confirm 
+            onClick={handleSubmit}
+         >
+            Login!
+         </Button>
       </form>
    </>
    )

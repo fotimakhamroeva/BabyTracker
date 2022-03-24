@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from "../context/userContext";
@@ -8,20 +9,27 @@ import "./Navbar.scss";
 
 export default function Navbar(props) {
 
-  const { userContextEmail, userContextFirstName } = useContext(UserContext)
-
-  const { handleLogin, handleRegister } = props
+  const { userContextEmail, setUserEmail, userContextFirstName, setUserFirstName } = useContext(UserContext)
 
   let navigate = useNavigate();
   
-  console.log("Navbar first name:", userContextFirstName)
-  console.log("Navbar email:", userContextEmail)
+  const handleLogout = () => {
+    axios.post('http://localhost:8080/api/auth/logout')
+    .then(() => {
+      setUserEmail('')
+      setUserFirstName('')
+      navigate("/login")
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 
   if (userContextFirstName) {
     return(
       <nav>
         <span className='username'>Hello, {userContextFirstName}!</span>
-        <Button danger onClick={props.onClick}>Logout</Button>
+        <Button danger onClick={handleLogout}>Logout</Button>
       </nav>
     )
   } else {

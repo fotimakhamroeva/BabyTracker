@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import RegistrationPage from "./components/RegistrationPage";
 import LoginPage from "./components/LoginPage"
 import NewBaby from "./components/NewBaby"
+import BabyPage from "./components/BabyPage"
 
 import { UserContextProvider } from "./context/userContext";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/newbaby" element={<NewBaby />} />
+          <Route path="/user" element={<BabyPage />} />
         </Routes>
       </UserContextProvider>
     </div>

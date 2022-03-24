@@ -7,7 +7,14 @@ import './BabyPage.scss'
 
 export default function BabyPage(props) {
 
-  return(
+  axios.get("http://localhost:8080/api/baby/", {
+    withCredentials: true
+  })
+  .then((result) => {
+    console.log(result.data)
+  })
 
+  return(
+    <h1>Test</h1>
   )
 }
