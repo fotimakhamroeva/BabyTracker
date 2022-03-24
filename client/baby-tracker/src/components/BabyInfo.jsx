@@ -3,7 +3,7 @@ import "./BabyInfo.scss";
 
 export default function BabyInfo(props) {
     return(
-        <section className="section">
+        <section className="baby-section section">
              <div className="row align-items-start">
                 <div className="babyPic">
                     <img className="babyPicImage" src={ props.babyPic } alt="Avatar" />
