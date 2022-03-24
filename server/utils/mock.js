@@ -68,10 +68,8 @@ const logs = {
     1: {
         id: 1,
         event_type: LogTypes.HEIGHT,
-        event_detail: {
-            height: 56,
-            unit: "cm"
-        },
+        event_amount: 56,
+        event_unit: "cm",
         event_datetime: 1647676171,
         baby_id: 1,
         created_by: 1
@@ -79,10 +77,8 @@ const logs = {
     2: {
         id: 2,
         event_type: LogTypes.HEIGHT,
-        event_detail: {
-            height: 60,
-            unit: "cm"
-        },
+        event_amount: 60,
+        event_unit: "cm",
         event_datetime: 1650354571,
         baby_id: 1,
         created_by: 1
@@ -90,10 +86,8 @@ const logs = {
     3: {
         id: 3,
         event_type: LogTypes.APPOINTMENT,
-        event_detail: {
-            appointment_location: "33 Testers Drive, London UK",
-            appointment_detail: "3 months with Dr. Mackyla"
-        },
+        event_name: "3 months with Dr. Mackyla",
+        event_detail: "33 Testers Drive, London UK",
         event_datetime: 1650354571,
         baby_id: 1,
         created_by: 1
@@ -101,10 +95,8 @@ const logs = {
     4: {
         id: 4,
         event_type: LogTypes.VACCINE,
-        event_detail: {
-            vaccine_name: "4 month vaccine",
-            vaccine_detail: "Diphtheria, tetanus, whooping cough, Haemophilus influenzae"
-        },
+        event_name: "4 month vaccine",
+        event_detail: "Diphtheria, tetanus, whooping cough, Haemophilus influenzae",
         event_datetime: 1647848971,
         baby_id: 2,
         created_by: 1
@@ -112,10 +104,8 @@ const logs = {
     5: {
         id: 5,
         event_type: LogTypes.TEMPERATURE,
-        event_detail: {
-            temperature: 36.5,
-            unit: "C"
-        },
+        event_amount: 36.5,
+        event_unit: "C",
         event_datetime: 1647676171,
         baby_id: 1,
         created_by: 1
@@ -123,10 +113,8 @@ const logs = {
     6: {
         id: 6,
         event_type: LogTypes.MEDICINE,
-        event_detail: {
-            medicine_name: "Tylenol Syrup",
-            medicine_dose: "5 mg"
-        },
+        event_name: "Tylenol Syrup",
+        event_detail: "5 mg",
         event_datetime: 1647848971,
         baby_id: 2,
         created_by: 1

@@ -26,8 +26,16 @@ const getParentFromSession = function(req) {
     return undefined;
 }
 
-const areBasicLogPropertiesProvided = function(req) {
-    if (req.body.event_type && req.body.event_datetime) {
+const areBasicMeasurementLogPropertiesProvided = function(req) {
+    if (req.body.event_type && req.body.event_datetime && req.body.event_amount && req.body.event_unit) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const areBasicEventLogPropertiesProvided = function(req) {
+    if (req.body.event_type && req.body.event_datetime && req.body.event_name && req.body.event_detail) {
         return true;
     } else {
         return false;
@@ -46,8 +54,12 @@ const showLogPropertiesRequired = function(res, properties) {
     res.status(400).json({ message: `Bad Request. The following 'Log' propertie(s) required: ${properties}.` });
 }
 
-const showLogBasicPropertiesRequired = function(res) {
-    showLogPropertiesRequired(res, ["event_type", "event_datetime"]);
+const showMeasurementLogBasicPropertiesRequired = function(res) {
+    showLogPropertiesRequired(res, ["event_type", "event_datetime", "event_amount", "event_unit"]);
+}
+
+const showEventLogBasicPropertiesRequired = function(res) {
+    showLogPropertiesRequired(res, ["event_type", "event_datetime", "event_name", "event_detail"]);
 }
 
 const showBabyPropertiesRequired = function(res, properties) {
@@ -59,8 +71,10 @@ module.exports = {
     getParentFromSession, 
     showBabyInvalid, 
     showParentInvalid, 
-    areBasicLogPropertiesProvided,
+    areBasicMeasurementLogPropertiesProvided,
+    areBasicEventLogPropertiesProvided,
     showLogPropertiesRequired,
-    showLogBasicPropertiesRequired,
+    showMeasurementLogBasicPropertiesRequired,
+    showEventLogBasicPropertiesRequired,
     showBabyPropertiesRequired
 }
