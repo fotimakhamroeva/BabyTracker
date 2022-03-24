@@ -3,7 +3,7 @@ const router = express.Router();
 const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/mock');
 
 router.post('/login', (req,res) => {
-    console.log(users)
+    // console.log(users)
     const email = req.body.email;
     const password = req.body.password;
     const foundUser = users[email];
