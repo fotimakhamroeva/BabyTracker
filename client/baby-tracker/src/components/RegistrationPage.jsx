@@ -18,7 +18,7 @@ export default function RegistrationPage(props) {
       const name = e.target.name
       const value = e.target.value
       setUser(prev => ({...user, [name]: value}))
-      console.log(user)
+      // console.log(user)
    }
 
    const handleSubmit = () => {

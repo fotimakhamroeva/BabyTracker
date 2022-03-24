@@ -37,7 +37,6 @@ export default function RegistrationPage(props) {
       })
       .then((result) => { 
          const { email:emailFromServer, first_name} = result.data.user
-         console.log(result.data.user)
          setUserEmail(emailFromServer)
          setUserFirstName(first_name)
          navigate("/user")
