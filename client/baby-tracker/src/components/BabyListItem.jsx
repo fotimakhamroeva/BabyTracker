@@ -6,7 +6,13 @@ import "./BabyListItem.scss";
 
 export default function BabyListItem(props) {
 
-  const { name, image, goToNewBabyPage, handleClickOnBaby } = props
+  const { name, image, id, goToNewBabyPage } = props
+
+  let navigate = useNavigate();
+
+  const goToBabyDetailsPage = (baby) => {
+    navigate(`/babydetails/${id}`)
+  }
 
   let babyClass = classNames('baby-list__item', {
     "day-list__item--selected": props.selected,
@@ -14,7 +20,7 @@ export default function BabyListItem(props) {
 
   if (name) {
     return(
-      <div className={babyClass} onClick={handleClickOnBaby}>
+      <div className={babyClass} onClick={goToBabyDetailsPage}>
         <h3>{name}</h3>
         <img src={image} />
       </div>

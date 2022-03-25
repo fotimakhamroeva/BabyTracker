@@ -21,6 +21,20 @@ router.get('/', (req, res) => {
     res.status(200).json(babiesToReturn);
 });
 
+router.get('/:baby_id', (req, res) => {
+    const parent = security.getParentFromSession(req);
+    if (!parent) {
+        security.showParentInvalid(res);
+        return;
+    }
+    const baby = babies[req.params.baby_id];
+    if(baby) {
+        res.status(200).json(baby)
+    } else {
+        res.status(200).json({})
+    }
+});
+
 /* 
 Request Body:
 {
