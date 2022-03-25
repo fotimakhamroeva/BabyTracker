@@ -1,14 +1,2 @@
-@import "styles/mixins.scss";
 @import "styles/variables.scss";
 @import "../../styles/global.scss";
-
-#registration-form {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  height: 2rem;
-  width: 30rem;
-  margin-bottom: 0.5rem;
-}

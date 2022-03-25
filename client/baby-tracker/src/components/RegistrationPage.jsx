@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios'
-
 import Button from './Button'
-
 import './RegistrationPage.scss'
 
 export default function RegistrationPage(props) {
@@ -38,42 +36,58 @@ export default function RegistrationPage(props) {
    
    return(
       <section className="section">
-      <h1>Register new account here</h1>
-      <form id='registration-form' onSubmit={(e) => e.preventDefault()}>
-      <input
-            className="registation"
-            type="text"
-            name='firstName'
-            placeholder="Enter first name"
-            value={user.firstName}
-            onChange={handleChange}
-         />
-         <input
-            className="registation"
-            type="text"
-            name='lastName'
-            placeholder="Enter last name"
-            value={user.lastName}
-            onChange={handleChange}
-         />
-         <input
-            className="registation"
-            type="text"
-            name='email'
-            placeholder="Enter email"
-            value={user.email}
-            onChange={handleChange}
-         />
-         <input
-            className="registation"
-            type="password"
-            name='password'
-            placeholder="Enter password"
-            value={user.password}
-            onChange={handleChange}
-         />
-         <Button confirm onClick={handleSubmit}>Register!</Button>
-      </form>
+         <h2 className="pageHeading">Register new account here</h2>
+         <form className="formContainer" onSubmit={(e) => e.preventDefault()}>
+            <div class="mb-3">
+               <label for="firstName" class="form-label">First Name</label>
+               <input
+                  type="text"
+                  id="firstName" 
+                  name='firstName'
+                  className="form-control" 
+                  placeholder="Enter first name"
+                  value={user.firstName}
+                  onChange={handleChange}
+               />
+            </div>
+            <div class="mb-3">
+               <label for="lastName" class="form-label">First Name</label>
+               <input
+                  className="form-control" 
+                  type="text"
+                  id="lastName" 
+                  name='lastName'
+                  placeholder="Enter last name"
+                  value={user.lastName}
+                  onChange={handleChange}
+               />
+            </div>
+            <div class="mb-3">
+               <label for="email" class="form-label">Email Address</label>
+               <input
+                  className="form-control" 
+                  type="email"
+                  id="email" 
+                  name='email'
+                  placeholder="Enter email"
+                  value={user.email}
+                  onChange={handleChange}
+               />
+            </div>
+            <div class="mb-3">
+               <label for="password" class="form-label">Password</label>
+               <input
+                  className="form-control" 
+                  type="password"
+                  id="password" 
+                  name='password'
+                  placeholder="Enter password"
+                  value={user.password}
+                  onChange={handleChange}
+               />
+            </div>
+            <Button confirm onClick={handleSubmit}>Register!</Button>
+         </form>
       </section>
    )
 
