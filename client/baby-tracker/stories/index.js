@@ -13,6 +13,7 @@ import BabyListItem from '../src/components/BabyListItem'
 import NewBaby from '../src/components/NewBaby';
 import LogCalendar from '../src/components/LogCalendar';
 import LogList from '../src/components/LogList';
+import BabyInfo from '../src/components/BabyInfo';
 
 storiesOf("Button", module)
   .addParameters({
@@ -51,3 +52,9 @@ storiesOf("Log List", module)
   })
   .add("Calendar", () => <LogCalendar />)
   .add("List", () => <LogList />)
+
+storiesOf("Baby Info", module) 
+  .addParameters({
+    backgrounds: [{ name: "dark", value: "aliceblue", default: true }]
+  })
+  .add("Info", () => <BabyInfo babyName="Bob" dateOfBirth="Jan 1st, 2022" birthLocation="Home" babyPic="https://cdn-icons-png.flaticon.com/512/191/191526.png" />)
