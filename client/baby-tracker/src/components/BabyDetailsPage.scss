@@ -1,0 +1,10 @@
+@import "styles/variables.scss";
+@import "../../styles/global.scss";
+
+.detailMoreSection {
+  width: auto;
+}
+
+.detailBabyInfoSpace {
+  height: calc(var(--bs-gutter-x) * .5);;
+}

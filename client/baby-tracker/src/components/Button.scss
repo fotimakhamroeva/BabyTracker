@@ -1,50 +1,41 @@
-@import "styles/mixins.scss";
 @import "styles/variables.scss";
 
 .button {
+  min-width: 100px;
+  padding: 10px;
   font-weight: bold;
-  border-radius: 1rem;
-  border: 0;
-  font-size: 1.5rem;
-  height: 2rem;
-  line-height: 1.2rem;
-  margin-right: 1rem;
-  width: 8rem;
-  border-width: 2px;
+  border-radius: 30px;
+  font-size: 12pt;
+  border-width: 0.5px;
   border-style: solid;
-  border-color: $white;
-  color: $white;
-  background-color: transparent;
+  border-color: gainsboro;
+  color: $default-button-text-up;
+  background-color: $default-button-up;
 }
 
 .button:hover {
-  @include button-active;
-
-  color: $black;
-  background-color: $white;
-  border: 2px solid transparent;
+  background-color: $default-button-down;
+  color: $default-button-text-down;
 }
 
 .button--danger {
-  color: $danger-color;
-  border-color: $danger-color;
-  background-color: transparent;
-}
-
-.button--confirm {
-  color: $confirm-color;
-  border-color: $confirm-color;
-  background-color: transparent;
+  color: $danger-button-text-up;
+  background-color: $danger-button-up;
 }
 
 .button--danger:hover {
-  color: $white;
-  background-color: $danger-color;
+  color: $danger-button-text-down;
+  background-color: $danger-button-down;
+}
+
+.button--confirm {
+  color: $confirm-button-text-up;
+  background-color: $confirm-button-up;
 }
 
 .button--confirm:hover {
-  color: $white;
-  background-color: $confirm-color;
+  color: $confirm-button-text-down;
+  background-color: $confirm-button-down;
 }
 
 .button:last-of-type {

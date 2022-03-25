@@ -4,5 +4,54 @@
     border-radius: 10px;
     border-style: solid;
     border-color: grey;
-    padding: 15px;
+    padding: 15px 15px 45px 15px;
+}
+
+.formContainer {
+    max-width: 500px;
+}
+
+.pageHeading {
+    margin-bottom: 50px;
+}
+
+html, body, div#root {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.react-calendar {
+    width: 100%;
+    border-style: hidden;
+}
+.react-calendar__tile--now {
+    background: rgb(194, 218, 218);
+    color: white;
+}
+.react-calendar__tile--active {
+    background: $theme-primary;
+    color: white;
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+    background: rgb(194, 218, 218);
+    color: white;
+}
+.react-calendar__tile--hasActive {
+    background: $theme-primary;
+    color: white;
+}
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+    background: $theme-primary;
+    color: white;
+} 
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+    background: $theme-primary;
+    color: white;
+}
+.react-calendar__year-view .react-calendar__tile, .react-calendar__decade-view .react-calendar__tile, .react-calendar__century-view .react-calendar__tile {
+    padding: 10px 5px 10px 5px;
 }

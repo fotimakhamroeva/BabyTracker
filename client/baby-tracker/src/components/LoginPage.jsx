@@ -2,9 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
 import { useNavigate } from "react-router-dom";
-
 import Button from './Button'
-
 import './LoginPage.scss'
 
 export default function RegistrationPage(props) {
@@ -47,33 +45,32 @@ export default function RegistrationPage(props) {
    }
 
    return(
-      <>
-      <h1>Login into your account</h1>
-      <form id='login-form' onSubmit={(e) => e.preventDefault()}>
-      <input
-         className="login"
-         type="text"
-         name='email'
-         placeholder="Enter email"
-         value={user.email}
-         onChange={handleChange}
-
-      />
-      <input
-         className="login"
-         type="password"
-         name='password'
-         placeholder="Enter password"
-         value={user.password}
-         onChange={handleChange}
-      />
-         <Button 
-            confirm 
-            onClick={handleSubmit}
-         >
-            Login!
-         </Button>
-      </form>
-   </>
+      <section className="section">
+         <h2 className="pageHeading">Login into your account</h2>
+         <form className="formContainer" onSubmit={(e) => e.preventDefault()}>
+            <div class="mb-3">
+               <label for="email" class="form-label">Email address</label>
+               <input 
+                  type="email" 
+                  className="form-control" 
+                  id="email" 
+                  name="email" 
+                  aria-describedby="emailHelp"
+                  value={user.email}
+                  onChange={handleChange} />
+            </div>
+            <div class="mb-3">
+               <label for="password" class="form-label">Password</label>
+               <input 
+                  type="password" 
+                  className="form-control" 
+                  id="password" 
+                  name="password"
+                  value={user.password}
+                  onChange={handleChange} />
+            </div>
+            <Button confirm onClick={handleSubmit}>Login!</Button>
+         </form>
+      </section>
    )
 }

@@ -7,16 +7,16 @@ import LoginPage from "./components/LoginPage"
 import NewBaby from "./components/NewBaby"
 import BabyList from "./components/BabyList"
 import BabyDetailsPage from "./components/BabyDetailsPage"
-
 import { UserContextProvider } from "./context/userContext";
+import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
+    <div className="app container">
       <UserContextProvider>
-        <Navbar></Navbar>
+        <header className="App-header">
+          <Navbar />
+        </header>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
