@@ -6,7 +6,9 @@ const defaultState = {
   firstName: '',
   setUserFirstName: () => {},
   parentId: null,
-  setUserParentId: () => {}
+  setUserParentId: () => {},
+  baby: '',
+  setUserBaby: () => {}
 };
 
 export const UserContext = createContext(
@@ -20,6 +22,8 @@ export const UserContextProvider = ({children}) => {
 
   const [userContextFirstName, setuserContextFirstName] = useState(defaultState.firstName)
 
+  const [userContextBaby, setuserContextBaby] = useState(defaultState.baby)
+
   const setUserEmail = (email) => {
     setuserContextEmail(email)
   }
@@ -28,9 +32,13 @@ export const UserContextProvider = ({children}) => {
     setuserContextFirstName(firstName)
   }
 
+  const setUserBaby = (baby) => {
+    setuserContextBaby(baby)
+  }
+
 
   return(
-    <UserContext.Provider value={{ userContextEmail, setUserEmail, userContextFirstName, setUserFirstName }}>
+    <UserContext.Provider value={{ userContextEmail, setUserEmail, userContextFirstName, setUserFirstName, userContextBaby,  setUserBaby}}>
       {children}
     </UserContext.Provider>
   )
