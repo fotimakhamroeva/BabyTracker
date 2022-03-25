@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
+import LogList from "./LogList";
+import "./BabyDetailsPage.scss"
 
 
 export default function BabyDetailsPage(props) {
@@ -12,6 +14,13 @@ export default function BabyDetailsPage(props) {
   console.log(userContextBaby)
 
   return(
-    <h1>Test</h1>
+    <div className="row align-items-start">
+      <section className="section col">
+        Test
+      </section>
+      <section className="detailMoreSection">
+        <LogList />
+      </section>
+    </div>
   )
 }
