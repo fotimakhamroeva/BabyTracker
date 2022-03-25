@@ -6,7 +6,7 @@ import "./BabyListItem.scss";
 
 export default function BabyListItem(props) {
 
-  const { name, image, goToNewBabyPage } = props
+  const { name, image, goToNewBabyPage, handleClickOnBaby } = props
 
   let babyClass = classNames('baby-list__item', {
     "day-list__item--selected": props.selected,
@@ -14,7 +14,7 @@ export default function BabyListItem(props) {
 
   if (name) {
     return(
-      <div className={babyClass}>
+      <div className={babyClass} onClick={handleClickOnBaby}>
         <h3>{name}</h3>
         <img src={image} />
       </div>
