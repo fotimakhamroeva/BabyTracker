@@ -25,17 +25,20 @@ export default function BabyList(props) {
     })
   }, [])
 
-  const goToBabyDetailsPage = (baby) => {
-    setUserBaby(baby)
-    navigate("/babydetails")
+  const goToNewBabyPage = () => {
+    navigate('/newbaby')
   }
+
+
 
   babyListItems = babies.map((baby) => {
     return(
       <BabyListItem
+        key={baby.id}
+        id={baby.id}
         name={baby.first_name}
         image={baby.picture_url}
-        handleClickOnBaby={goToBabyDetailsPage}
+        // handleClickOnBaby={goToBabyDetailsPage}
       />
     )
   })
@@ -44,7 +47,7 @@ export default function BabyList(props) {
   return(
     <ul>
       {babyListItems}
-      <BabyListItem goToNewBabyPage={() => navigate("/newbaby")}/>
+      <BabyListItem goToNewBabyPage={goToNewBabyPage}/>
     </ul>
   )
 }
