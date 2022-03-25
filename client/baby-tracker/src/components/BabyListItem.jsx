@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-
 import "./BabyListItem.scss";
 
 export default function BabyListItem(props) {
@@ -14,21 +13,25 @@ export default function BabyListItem(props) {
     navigate(`/babydetails/${id}`)
   }
 
-  let babyClass = classNames('baby-list__item', {
-    "day-list__item--selected": props.selected,
-  })
-
   if (name) {
     return(
-      <div className={babyClass} onClick={goToBabyDetailsPage}>
-        <h3>{name}</h3>
-        <img src={image} />
+      <div className="baby-list__item rounded-circle" onClick={goToBabyDetailsPage}>
+        { (image) 
+          ? <img src={image} className="baby-list__item-srcImage rounded-circle" alt="Avatar" /> 
+          : <img src="/baby.png" className="baby-list__item-defaultImage" alt="Avatar" />
+        }
+        <div className="baby-list__item-text-container rounded-circle">
+          <div className="baby-list__item-text">{name}</div>
+        </div>
       </div>
     )
   } else {
     return(
-      <div className={babyClass} onClick={goToNewBabyPage}>
-        <h3>Add new baby!</h3>
+      <div className="baby-list__item rounded-circle" onClick={goToNewBabyPage}>
+        <img src="/baby-new.png" className="baby-list__item-defaultImage" alt="Avatar" />
+        <div className="baby-list__item-text-container rounded-circle">
+          <h4 className="baby-list__item-text">New Baby?</h4>
+        </div>
       </div>
     )
   }
