@@ -6,8 +6,9 @@ import RegistrationPage from "./components/RegistrationPage";
 import LoginPage from "./components/LoginPage"
 import NewBaby from "./components/NewBaby"
 import BabyList from "./components/BabyList"
-import "./App.scss";
+import BabyDetailsPage from "./components/BabyDetailsPage"
 import { UserContextProvider } from "./context/userContext";
+import "./App.scss";
 
 function App() {
   return (
@@ -17,11 +18,13 @@ function App() {
           <Navbar />
         </header>
         <Routes>
+          <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/newbaby" element={<NewBaby />} />
           <Route path="/user" element={<BabyList />} />
           <Route path="/newbaby" element={<NewBaby />} />
+          <Route path="/babydetails" element={<BabyDetailsPage />} />
         </Routes>
       </UserContextProvider>
     </div>

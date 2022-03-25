@@ -52,7 +52,7 @@ export default function RegistrationPage(props) {
                <label for="email" class="form-label">Email address</label>
                <input 
                   type="email" 
-                  class="form-control" 
+                  className="form-control" 
                   id="email" 
                   name="email" 
                   aria-describedby="emailHelp"
