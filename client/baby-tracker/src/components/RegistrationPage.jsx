@@ -37,7 +37,7 @@ export default function RegistrationPage(props) {
    }
    
    return(
-      <>
+      <section className="section">
       <h1>Register new account here</h1>
       <form id='registration-form' onSubmit={(e) => e.preventDefault()}>
       <input
@@ -74,7 +74,7 @@ export default function RegistrationPage(props) {
          />
          <Button confirm onClick={handleSubmit}>Register!</Button>
       </form>
-      </>
+      </section>
    )
 
 }

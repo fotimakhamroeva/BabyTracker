@@ -7,12 +7,16 @@
     padding: 15px;
 }
 
+.formContainer {
+    max-width: 500px;
+}
+
+.pageHeading {
+    margin-bottom: 50px;
+}
+
 html, body, div#root {
     height: 100%;
     margin: 0px;
     padding: 0px;
-}
-
-#root {
-  background-color: $theme-background;
 }
