@@ -22,8 +22,6 @@ export const UserContextProvider = ({children}) => {
 
   const [userContextFirstName, setuserContextFirstName] = useState(defaultState.firstName)
 
-  const [userContextBaby, setuserContextBaby] = useState(defaultState.baby)
-
   const setUserEmail = (email) => {
     setuserContextEmail(email)
   }
@@ -32,13 +30,8 @@ export const UserContextProvider = ({children}) => {
     setuserContextFirstName(firstName)
   }
 
-  const setUserBaby = (baby) => {
-    setuserContextBaby(baby)
-  }
-
-
   return(
-    <UserContext.Provider value={{ userContextEmail, setUserEmail, userContextFirstName, setUserFirstName, userContextBaby,  setUserBaby}}>
+    <UserContext.Provider value={{ userContextEmail, setUserEmail, userContextFirstName, setUserFirstName }}>
       {children}
     </UserContext.Provider>
   )

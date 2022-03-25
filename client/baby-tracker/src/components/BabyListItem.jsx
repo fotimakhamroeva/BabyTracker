@@ -5,14 +5,17 @@ import "./BabyListItem.scss";
 
 export default function BabyListItem(props) {
 
-  const { name, image, goToNewBabyPage, handleClickOnBaby } = props
+  const { name, image, id, goToNewBabyPage } = props
 
-  // let babyClass = classNames('baby-list__item', {
-  // })
+  let navigate = useNavigate();
+
+  const goToBabyDetailsPage = (baby) => {
+    navigate(`/babydetails/${id}`)
+  }
 
   if (name) {
     return(
-      <div className="baby-list__item rounded-circle" onClick={handleClickOnBaby}>
+      <div className="baby-list__item rounded-circle" onClick={goToBabyDetailsPage}>
         { (image) 
           ? <img src={image} className="baby-list__item-srcImage rounded-circle" alt="Avatar" /> 
           : <img src="/baby.png" className="baby-list__item-defaultImage" alt="Avatar" />
