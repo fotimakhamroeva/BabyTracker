@@ -12,3 +12,7 @@ html, body, div#root {
     margin: 0px;
     padding: 0px;
 }
+
+#root {
+  background-color: $theme-background;
+}

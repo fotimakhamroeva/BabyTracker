@@ -11,7 +11,7 @@ import { UserContextProvider } from "./context/userContext";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app container">
       <UserContextProvider>
         <header className="App-header">
           <Navbar />
