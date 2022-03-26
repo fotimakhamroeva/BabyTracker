@@ -48,6 +48,16 @@ router.get('/', (req, res) => {
     res.status(200).json(logsToReturn);
 });
 
+// router.get('/:baby_id', (req, res) => {
+//     if (babyId) {
+//         const isBabyYours = security.isBabyYours(babyId, parent.id);
+//         if (!isBabyYours) {
+//             security.showBabyInvalid(res);
+//             return;
+//         }
+//     }
+//     const dateFilter = req.query.date_filter;});
+
 /* 
 Example for Head size:
 {
