@@ -138,7 +138,7 @@ export default function BabyDetailsPage(props) {
         <div className="detailBabyInfoSpace" />
       </section>
       <section className="col">
-        <LogList />
+        <LogList babyId={id} />
       </section>
 
       <LogMeasurementModal 
