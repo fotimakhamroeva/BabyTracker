@@ -36,3 +36,7 @@ body {
   padding: 0px;
   background-color: $theme-background;
 }
+
+.input-group-append .input-group-text {
+  height: 100%;
+}
