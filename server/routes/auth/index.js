@@ -11,14 +11,27 @@ module.exports = (db) => {
         const password = req.body.password;
         const foundUser = users[email];
         const foundPassword = (foundUser) ? foundUser.password : null;
-        if (password === foundPassword) {
-            let userToUse = JSON.parse(JSON.stringify(foundUser));
-            delete userToUse.password;
-            req.session.user = userToUse;
-            return res.status(200).json({ message : "Login successful.", user: userToUse });
-        } else {
-            return res.status(401).json({ message : "Please, check your email or password." });
-        }
+        
+            // let userToUse = JSON.parse(JSON.stringify(foundUser));
+            // delete userToUse.password;
+            // req.session.user = userToUse;
+            db.query('SELECT * FROM parent WHERE email = $1 AND password = $2', 
+            [email, password] )
+            
+            .then((result) => {
+                const user = result.rows[0];
+                req.session.user = user;
+                res.status(200).json({ message : "Login successful.", user})
+            })
+            .catch((error) => {
+                console.log(error) 
+                res.status(401).json({ message : "Request failed" });
+            })
+            
+        // } else {
+        //     return res.status(401).json({ message : "Please, check your email or password." });
+        // }
+       
     });
     
     
