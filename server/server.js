@@ -45,8 +45,8 @@ client.connect()
 });
 
 App.use('/api/auth', authRoutes(client));
-App.use('/api/log', logRoutes);
-App.use('/api/baby', babyRoutes);
+App.use('/api/baby', babyRoutes(client));
+App.use('/api/log', logRoutes(client));
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console

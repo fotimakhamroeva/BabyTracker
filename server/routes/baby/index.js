@@ -4,6 +4,8 @@ const security = require('../../utils/security');
 const utils = require('../../utils/utils');
 const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/mock');
 
+module.exports = (db) => {
+
 router.get('/', (req, res) => {
     const parent = security.getParentFromSession(req);
     if (!parent) {
@@ -60,9 +62,14 @@ router.post('/', (req,res) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         date_of_birth: req.body.date_of_birth,
-        birth_location: req.body.birth_location,
+        born_at: req.body.birth_location,
         picture_url: req.body.picture_url
     }
+    db.query('INSERT INTO baby (first_name, last_name, date_of_birth, born_at, picture_url ) VALUES ($1, $2, $3, $4, $5) returning *', 
+        [babyData.first_name, babyData.last_name, babyData.date_of_birth, babyData.born_at, babyData.picture_url]  )
+        .then((res) => {console.log(res)})
+        .catch((error) => console.log(error));
+
     const parentBabyData = {
         id: utils.getNewId(Object.keys(parentBabies)),
         parent_id: parent.id,
@@ -72,5 +79,7 @@ router.post('/', (req,res) => {
     parentBabies[parentBabyData.id] = parentBabyData;
     utils.show201SuccessMessage(res, babyData);
 });
+return router; 
+};
 
-module.exports = router;
+// module.exports = router;
