@@ -8,6 +8,7 @@ import BabyInfo from "./BabyInfo";
 import "./BabyDetailsPage.scss"
 import Button from "./Button";
 import LogMeasurementModal from "./LogMeasurementModal";
+import LogEventModal from "./LogEventModal";
 
 
 export default function BabyDetailsPage(props) {
@@ -123,13 +124,13 @@ export default function BabyDetailsPage(props) {
           <div className="row">
             <div class="col d-flex justify-content-start">
               <Button confirm children="Temperature" className="log-button" toggleType="modal" toggleTarget="#modalTemperature"/>
-              <Button confirm children="Appointment" className="log-button" />
+              <Button confirm children="Appointment" className="log-button" toggleType="modal" toggleTarget="#modalAppointment" />
             </div>
           </div>
           <div className="row mt-2">
             <div class="col d-flex justify-content-start">
-              <Button confirm children="Vaccine" className="log-button" />
-              <Button confirm children="Medication" className="log-button" />
+              <Button confirm children="Vaccine" className="log-button" toggleType="modal" toggleTarget="#modalVaccine" />
+              <Button confirm children="Medication" className="log-button" toggleType="modal" toggleTarget="#modalMedicine" />
             </div>
           </div>
           <h4 className="mt-4 mb-3">Log {babyDetails.first_name}'s growth</h4>
@@ -174,6 +175,27 @@ export default function BabyDetailsPage(props) {
         modalTitle="Log Height"
         unitOptions={lengthUnits}
         measurementType={LogTypes.HEIGHT} />
+
+      <LogEventModal 
+        modalId="modalMedicine" 
+        modalTitle="Log Medication"
+        titlePlaceholder="Ex. Baby Tylenol"
+        detailPlaceholder="Ex. 5mg"
+        eventType={LogTypes.MEDICINE} />
+
+      <LogEventModal 
+        modalId="modalVaccine" 
+        modalTitle="Log Vaccine"
+        titlePlaceholder="Ex. 6 month vaccine"
+        detailPlaceholder="Ex. Diphtheria, tetanus"
+        eventType={LogTypes.VACCINE} />
+
+      <LogEventModal 
+        modalId="modalAppointment" 
+        modalTitle="Log Appointment"
+        titlePlaceholder="Ex. 4 month checkup"
+        detailPlaceholder="Ex. Dr John at Cambridge clinic"
+        eventType={LogTypes.APPOINTMENT} />
 
     </div>
   )
