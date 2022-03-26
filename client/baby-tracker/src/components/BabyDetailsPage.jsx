@@ -7,6 +7,7 @@ import LogList from "./LogList";
 import BabyInfo from "./BabyInfo";
 import "./BabyDetailsPage.scss"
 import Button from "./Button";
+import Graph from "./Graph"
 
 
 export default function BabyDetailsPage(props) {
@@ -31,19 +32,13 @@ export default function BabyDetailsPage(props) {
       withCredentials: true,
     })
     .then((result) => {
-      // console.log(result.data)
       const allLogs = result.data
       const specificBabyLogs = []
       for (let log of allLogs) {
-        // console.log('id:', typeof(id))
-        // console.log('log:', log)
-        // console.log('baby_id:', log.baby_id)
         if (log.baby_id == Number(id)) {
-          // console.log('matching')
           specificBabyLogs.push(log)
         }
       }
-      // console.log(specificBabyLogs)
       setBabyLogsHistory(specificBabyLogs)
     })
   }, [])
@@ -55,7 +50,6 @@ export default function BabyDetailsPage(props) {
         heightLogs.push(log)
       }
     }
-    console.log(heightLogs)
     return heightLogs
   }
 
@@ -66,7 +60,6 @@ export default function BabyDetailsPage(props) {
         weightLogs.push(log)
       }
     }
-    console.log(weightLogs)
     return weightLogs
   }
 
@@ -77,13 +70,8 @@ export default function BabyDetailsPage(props) {
         headLogs.push(log)
       }
     }
-    console.log(headLogs)
     return headLogs
   }
-
-  getHeightLogs(logsBabyHistory)
-  // getWeightLogs(logsBabyHistory)
-  // getHeadLogs(logsBabyHistory)
 
   return(
     <div className="row align-items-start">
@@ -114,7 +102,9 @@ export default function BabyDetailsPage(props) {
           </div>
           <h4 className="mt-4 mb-3">Charts</h4>
           <div className="row">
-            <h6>Chart here</h6>
+            <Graph logs={getHeightLogs(logsBabyHistory)} measurement='Height'/>
+            <Graph logs={getWeightLogs(logsBabyHistory)} measurement='Weight'/>
+            <Graph logs={getHeadLogs(logsBabyHistory)} measurement='Head'/>
           </div>
         </section>
         <div className="detailBabyInfoSpace" />
