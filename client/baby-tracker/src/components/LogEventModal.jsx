@@ -1,17 +1,14 @@
 import React, { useState, useContext } from "react";
 import axios from 'axios'
 import { UserContext } from '../context/userContext'
-import './LogMeasurementModal.scss'
+import './LogEventModal.scss'
 import {
    DatePicker,
    TimePicker,
  } from "react-tempusdominus-bootstrap";
  
-export default function LogMeasurementModal(props) {
+export default function LogEventModal(props) {
 
-   const unitOptions = props.unitOptions.map( option => 
-      <option value={option.value}>{option.name}</option>
-   )
    return(
       <form onSubmit={(e) => e.preventDefault()}>
          <div class="modal fade" id={props.modalId} data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -24,15 +21,15 @@ export default function LogMeasurementModal(props) {
                   <div class="modal-body">
                      <div class="row g-3 align-items-center">
                         <div class="col-3">
-                           <label for="amount" class="col-form-label">Amount</label>
+                           <label for="title" class="col-form-label">Title</label>
                         </div>
                         <div class="col-5">
                            <input 
-                              type="number" 
+                              type="text" 
                               className="form-control" 
-                              id="amount" 
-                              name="amount"
-                              placeholder="Ex. 56"
+                              id="title" 
+                              name="title"
+                              placeholder={props.titlePlaceholder}
                               // value={user.email}
                               // onChange={handleChange} 
                               />
@@ -40,12 +37,18 @@ export default function LogMeasurementModal(props) {
                      </div>
                      <div class="row g-3 align-items-center mt-1">
                         <div class="col-3">
-                           <label for="unit" class="col-form-label">Unit</label>
+                           <label for="detail" class="col-form-label">Detail</label>
                         </div>
                         <div class="col-5">
-                           <select id="unit" name="unit" class="form-select">
-                              {unitOptions}
-                           </select>
+                           <input 
+                              type="text" 
+                              className="form-control" 
+                              id="detail" 
+                              name="detail"
+                              placeholder={props.detailPlaceholder}
+                              // value={user.email}
+                              // onChange={handleChange} 
+                              />
                         </div>
                      </div>
                      <div class="row g-3 align-items-center mt-1">
