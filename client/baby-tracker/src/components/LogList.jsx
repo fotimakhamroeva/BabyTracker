@@ -15,7 +15,7 @@ export default function LogList(props) {
     )
     React.useEffect(() => {
         // Sun May 01 2022 00:00:00 GMT-0400 as Date
-        axios.get('http://localhost:8080/api/log?baby_id=' + props.babyId + '&date_filter=' + selectedDate, {
+        axios.get(`http://localhost:8080/api/log?baby_id=${props.babyId}&date_filter=${selectedDate}`, {
            withCredentials: true,
         })
         .then((result) => {
