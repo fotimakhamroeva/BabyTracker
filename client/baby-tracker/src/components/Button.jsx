@@ -6,15 +6,21 @@ import "./Button.scss";
 export default function Button(props) {
    let buttonClass = classNames('button', {
       "button--confirm": props.confirm,
-      "button--danger": props.danger
+      "button--confirm-secondary": props.confirmSecondary,
+      "button--danger": props.danger,
    });
 
-
+   let className = buttonClass;
+   if (props.className) {
+      className += " " + props.className;
+   }
 
    return (
       <button 
-         className={buttonClass}
-         onClick={props.onClick}>
+         className={className}
+         onClick={props.onClick}
+         data-bs-toggle={props.toggleType} 
+         data-bs-target={props.toggleTarget}>
          {props.children}
       </button>
    );
