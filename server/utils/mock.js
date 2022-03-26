@@ -131,7 +131,7 @@ const logs = {
     8: {
         id: 8,
         event_type: LogTypes.HEAD,
-        event_amount: 20,
+        event_amount: 23,
         event_unit: "cm",
         event_datetime: 1660354571,
         baby_id: 1,
@@ -152,6 +152,33 @@ const logs = {
         event_amount: 30,
         event_unit: "cm",
         event_datetime: 1680354571,
+        baby_id: 1,
+        created_by: 1
+    },
+    11: {
+        id: 2,
+        event_type: LogTypes.HEIGHT,
+        event_amount: 63,
+        event_unit: "cm",
+        event_datetime: 1650354571,
+        baby_id: 1,
+        created_by: 1
+    },
+    12: {
+        id: 9,
+        event_type: LogTypes.WEIGHT,
+        event_amount: 38,
+        event_unit: "lbs",
+        event_datetime: 1690354571,
+        baby_id: 1,
+        created_by: 1
+    },
+    13: {
+        id: 8,
+        event_type: LogTypes.HEAD,
+        event_amount: 39,
+        event_unit: "cm",
+        event_datetime: 1700354571,
         baby_id: 1,
         created_by: 1
     },

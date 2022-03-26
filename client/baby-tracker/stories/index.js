@@ -14,6 +14,7 @@ import NewBaby from '../src/components/NewBaby';
 import LogCalendar from '../src/components/LogCalendar';
 import LogList from '../src/components/LogList';
 import BabyInfo from '../src/components/BabyInfo';
+import Graph from '../src/components/Graph';
 
 storiesOf("Button", module)
   .addParameters({
@@ -58,3 +59,6 @@ storiesOf("Baby Info", module)
     backgrounds: [{ name: "dark", value: "aliceblue", default: true }]
   })
   .add("Info", () => <BabyInfo babyName="Bob" dateOfBirth="Jan 1st, 2022" birthLocation="Home" babyPic="https://cdn-icons-png.flaticon.com/512/191/191526.png" />)
+
+storiesOf("Basic graph", module)
+  .add(Graph, () => <Graph />)
