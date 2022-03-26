@@ -6,6 +6,7 @@
     "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/preset-scss": "^1.0.3",
     "axios": "^0.26.1",
+    "chart.js": "^3.7.1",
     "classnames": "^2.2.6",
     "normalize.css": "^8.0.1",
     "react": "^16.9.0",

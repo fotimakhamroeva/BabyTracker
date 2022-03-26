@@ -13,6 +13,8 @@ export default function BabyDetailsPage(props) {
 
   const [babyDetails, setBabyDetails] = useState({})
 
+  const [logsBabyHistory, setBabyLogsHistory] = useState([])
+
   const { id } = useParams()
 
   useEffect(() => {
@@ -23,6 +25,65 @@ export default function BabyDetailsPage(props) {
       setBabyDetails(result.data)
     })
   }, [])
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/log/`, {
+      withCredentials: true,
+    })
+    .then((result) => {
+      // console.log(result.data)
+      const allLogs = result.data
+      const specificBabyLogs = []
+      for (let log of allLogs) {
+        // console.log('id:', typeof(id))
+        // console.log('log:', log)
+        // console.log('baby_id:', log.baby_id)
+        if (log.baby_id == Number(id)) {
+          // console.log('matching')
+          specificBabyLogs.push(log)
+        }
+      }
+      // console.log(specificBabyLogs)
+      setBabyLogsHistory(specificBabyLogs)
+    })
+  }, [])
+
+  const getHeightLogs = (logs) => {
+    let heightLogs = []
+    for (let log of logs) {
+      if (log.event_type === 'height') {
+        heightLogs.push(log)
+      }
+    }
+    console.log(heightLogs)
+    return heightLogs
+  }
+
+  const getWeightLogs = (logs) => {
+    let weightLogs = []
+    for (let log of logs) {
+      if (log.event_type === 'weight') {
+        weightLogs.push(log)
+      }
+    }
+    console.log(weightLogs)
+    return weightLogs
+  }
+
+  const getHeadLogs = (logs) => {
+    let headLogs = []
+    for (let log of logs) {
+      if (log.event_type === 'head') {
+        headLogs.push(log)
+      }
+    }
+    console.log(headLogs)
+    return headLogs
+  }
+
+  getHeightLogs(logsBabyHistory)
+  // getWeightLogs(logsBabyHistory)
+  // getHeadLogs(logsBabyHistory)
 
   return(
     <div className="row align-items-start">

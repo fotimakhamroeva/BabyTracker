@@ -119,6 +119,42 @@ const logs = {
         baby_id: 2,
         created_by: 1
     },
+    7: {
+        id: 7,
+        event_type: LogTypes.WEIGHT,
+        event_amount: 20,
+        event_unit: "lbs",
+        event_datetime: 1650354571,
+        baby_id: 1,
+        created_by: 1
+    },
+    8: {
+        id: 8,
+        event_type: LogTypes.HEAD,
+        event_amount: 20,
+        event_unit: "cm",
+        event_datetime: 1660354571,
+        baby_id: 1,
+        created_by: 1
+    },
+    9: {
+        id: 9,
+        event_type: LogTypes.WEIGHT,
+        event_amount: 25,
+        event_unit: "lbs",
+        event_datetime: 1670354571,
+        baby_id: 1,
+        created_by: 1
+    },
+    10: {
+        id: 8,
+        event_type: LogTypes.HEAD,
+        event_amount: 30,
+        event_unit: "cm",
+        event_datetime: 1680354571,
+        baby_id: 1,
+        created_by: 1
+    },
 }
 
 module.exports = { LogTypes, users, logs, babies, parentBabies }
