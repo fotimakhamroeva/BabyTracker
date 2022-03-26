@@ -10,7 +10,7 @@ $dark-background: #222f3e;
 
 $theme-background: rgb(216, 216, 216);
 $theme-primary: darkcyan;
-$theme-secondary: gray;
+$theme-secondary: limegreen;
 $theme-danger: #ee5253;
 $theme-error: #ff9f43;
 $theme-text-on-primary: white;
@@ -31,6 +31,11 @@ $confirm-button-up: $theme-primary;
 $confirm-button-down: rgb(0, 75, 75);
 $confirm-button-text-up: $theme-text-on-primary;
 $confirm-button-text-down: $theme-text-on-primary;
+
+$confirm-secondary-button-up: $theme-secondary;
+$confirm-secondary-button-down: rgb(0, 75, 75);
+$confirm-secondary-button-text-up: $theme-text-on-secondary;
+$confirm-secondary-button-text-down: $theme-text-on-secondary;
 
 $danger-button-up: $theme-danger;
 $danger-button-down: #8e2525;

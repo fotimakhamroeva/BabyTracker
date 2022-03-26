@@ -1,8 +1,8 @@
-@import "styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .button {
   min-width: 100px;
-  padding: 10px;
+  padding: 10px 20px;
   font-weight: bold;
   border-radius: 30px;
   font-size: 12pt;
@@ -36,6 +36,17 @@
 .button--confirm:hover {
   color: $confirm-button-text-down;
   background-color: $confirm-button-down;
+}
+
+.button--confirm-secondary {
+  color: $confirm-secondary-button-text-up;
+  background-color: $confirm-secondary-button-up;
+}
+
+.button--confirm-secondary:hover {
+  color: limegreen;
+  color: $confirm-secondary-button-text-down;
+  background-color: $confirm-secondary-button-down;
 }
 
 .button:last-of-type {
