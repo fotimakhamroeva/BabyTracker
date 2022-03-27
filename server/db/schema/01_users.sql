@@ -30,6 +30,8 @@ CREATE TABLE parent_baby (
 
 CREATE TABLE log (
   id SERIAL PRIMARY KEY NOT NULL,
+  event_name VARCHAR(255) NOT NULL,
+  event_detail VARCHAR(255) NOT NULL,
   event_type VARCHAR(255) NOT NULL,
   event_amount VARCHAR NOT NULL,
   event_unit VARCHAR NOT NULL,
