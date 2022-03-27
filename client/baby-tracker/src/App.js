@@ -22,8 +22,8 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element= { (!isUserLoggedIn) ? <Navigate replace to="/login" /> : <BabyList /> } />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={ (isUserLoggedIn) ? <Navigate replace to="/" /> : <RegistrationPage />} />
+          <Route path="/login" element={ (isUserLoggedIn) ? <Navigate replace to="/" /> : <LoginPage />} />
           <Route path="/newbaby" element= { (!isUserLoggedIn) ? <Navigate replace to="/login" /> : <NewBaby />} />
           <Route path="/user" element= { (!isUserLoggedIn) ? <Navigate replace to="/login" /> : <BabyList />} />
           <Route path="/babydetails/:id" element= { (!isUserLoggedIn) ? <Navigate replace to="/login" /> : <BabyDetailsPage /> } />
