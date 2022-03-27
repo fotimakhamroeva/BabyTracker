@@ -9,15 +9,18 @@ import "./Navbar.scss";
 
 export default function Navbar(props) {
 
-  const { userContextEmail, setUserEmail, userContextFirstName, setUserFirstName } = useContext(UserContext)
+  const { userContextEmail, setUserEmail, userContextFirstName, setUserFirstName } = useContext(UserContext);
+  const { isUserLoggedIn, setUserLoggedIn } = useContext(UserContext);
 
   let navigate = useNavigate();
   
   const handleLogout = () => {
-    axios.post('http://localhost:8080/api/auth/logout')
+    axios.post('http://localhost:8080/api/auth/logout', {
+      withCredentials: true,
+    })
     .then(() => {
-      setUserEmail('')
-      setUserFirstName('')
+      setUserEmail(undefined)
+      setUserFirstName(undefined)
       navigate("/login")
     })
     .catch((error) => {
@@ -25,7 +28,7 @@ export default function Navbar(props) {
     })
   }
 
-  if (userContextFirstName) {
+  if (isUserLoggedIn) {
     return(
       <nav>
         <h4 className='username align-middle'>Hello, {userContextFirstName}!</h4>
