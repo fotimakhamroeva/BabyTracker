@@ -11,7 +11,6 @@ import LogMeasurementModal from "./LogMeasurementModal";
 import LogEventModal from "./LogEventModal";
 import Graph from "./Graph"
 
-
 export default function BabyDetailsPage(props) {
 
   const LogTypes = {
