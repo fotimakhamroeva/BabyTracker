@@ -106,7 +106,6 @@ export default function BabyDetailsPage(props) {
     <div className="row align-items-start">
       <section className="col">
         <BabyInfo babyName={babyDetails.first_name + " " + babyDetails.last_name} dateOfBirth={babyDetails.date_of_birth} birthLocation={babyDetails.birth_location} babyPic={babyDetails.picture_url} />
-        <div className="detailBabyInfoSpace" />
         <section className="section">
           <h4 className="mb-3">Health</h4>
           <div className="row">
@@ -141,7 +140,6 @@ export default function BabyDetailsPage(props) {
             </div>
           </div>
         </section>
-        <div className="detailBabyInfoSpace" />
       </section>
       <section className="col">
         <LogList babyId={id} refreshState={refreshState} />
