@@ -61,10 +61,11 @@ router.post('/', (req,res) => {
         id: utils.getNewId(Object.keys(babies)),
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-        date_of_birth: req.body.date_of_birth,
+        date_of_birth: new Date(req.body.date_of_birth),
         born_at: req.body.birth_location,
         picture_url: req.body.picture_url
     }
+    console.log("baby date:", babyData.date_of_birth);
     db.query('INSERT INTO baby (first_name, last_name, date_of_birth, born_at, picture_url ) VALUES ($1, $2, $3, $4, $5) returning *', 
         [babyData.first_name, babyData.last_name, babyData.date_of_birth, babyData.born_at, babyData.picture_url]  )
         .then((res) => {console.log(res)})
