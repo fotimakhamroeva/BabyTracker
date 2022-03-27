@@ -35,9 +35,9 @@ export default function RegistrationPage(props) {
    }
    
    return(
-      <section className="section">
+      <section className="section row">
          <h2 className="pageHeading">Register new account here</h2>
-         <form className="formContainer" onSubmit={(e) => e.preventDefault()}>
+         <form className="col-7" onSubmit={(e) => e.preventDefault()}>
             <div class="mb-3">
                <label for="firstName" class="form-label">First Name</label>
                <input
@@ -88,6 +88,9 @@ export default function RegistrationPage(props) {
             </div>
             <Button confirm onClick={handleSubmit}>Register!</Button>
          </form>
+         <div className="col-3">
+            <img src="/logo.gif" />
+         </div>
       </section>
    )
 

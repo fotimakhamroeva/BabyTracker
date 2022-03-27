@@ -21,6 +21,7 @@ export default function Navbar(props) {
     .then(() => {
       setUserEmail(undefined)
       setUserFirstName(undefined)
+      setUserLoggedIn(false);
       navigate("/login")
     })
     .catch((error) => {
@@ -31,15 +32,27 @@ export default function Navbar(props) {
   if (isUserLoggedIn) {
     return(
       <nav>
-        <h4 className='username align-middle'>Hello, {userContextFirstName}!</h4>
-        <Button danger onClick={handleLogout}>Logout</Button>
+        <div className="logoContainer" onClick={() => navigate("/")}>
+          <img src="/logo-2.gif" />
+          <h3>Baby Tracker</h3>
+        </div>
+        <div className="navButtons">
+          <h4 className='username align-middle'>Hello, {userContextFirstName}!</h4>
+          <Button danger onClick={handleLogout}>Logout</Button>
+        </div>
       </nav>
     )
   } else {
     return(
       <nav>
-        <Button onClick={() => navigate("/login")}>Login</Button>
-        <Button onClick={() => navigate("/register")}>Register</Button>
+       <div className="logoContainer" onClick={() => navigate("/")}>
+          <img src="/logo-2.gif" />
+          <h3>Baby Tracker</h3>
+        </div>
+        <div className="navButtons">
+          <Button onClick={() => navigate("/login")}>Login</Button>
+          <Button onClick={() => navigate("/register")}>Register</Button>
+        </div>
       </nav>
     )
   }
