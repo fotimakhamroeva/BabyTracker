@@ -7,13 +7,17 @@ const parseIntOrUndefined = function(supposeInt) {
 }
 
 const getNewId = function(keys) {
+    //console.log(keys);
     let highestIdFound = 0;
     keys.forEach(key => {
-        if (key > highestIdFound) {
-            highestIdFound = key;
+        const keyInt = parseInt(key);
+        if (keyInt > highestIdFound) {
+            highestIdFound = keyInt;
         }
     });
-    return parseInt(highestIdFound) + 1;
+    const newHighest = parseInt(highestIdFound) + 1;
+    //console.log("new Highest id => " + newHighest);
+    return newHighest;
 }
 
 const show201SuccessMessage = function(res, optionalObject) {

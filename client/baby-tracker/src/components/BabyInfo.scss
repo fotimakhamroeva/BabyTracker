@@ -1,14 +1,25 @@
 @import "styles/variables.scss";
 @import "../../styles/global.scss";
 
-.babyPic {
-    width: 60px;
-}
-
-.babyPicImage {
-    width: 40px;
-}
-
 .baby-section {
     min-width: 400px;
+}
+
+.babyinfo-thumb {
+    background-color: rgb(69, 145, 147);
+    width:8vw;
+    height:8vw; 
+    min-width: 25px;
+    min-height: 25px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(198, 198, 198);
+    padding: 0px;
+    margin-left: 1em;
+}
+  
+.babyinfo-srcImage {
+    object-fit: cover;
+    width:100%;
+    height:100%;
 }

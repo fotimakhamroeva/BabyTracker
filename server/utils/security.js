@@ -35,7 +35,7 @@ const areBasicMeasurementLogPropertiesProvided = function(req) {
 }
 
 const areBasicEventLogPropertiesProvided = function(req) {
-    if (req.body.event_type && req.body.event_datetime && req.body.event_name && req.body.event_detail) {
+    if (req.body.event_type && req.body.event_datetime && req.body.event_name) {
         return true;
     } else {
         return false;
@@ -59,7 +59,7 @@ const showMeasurementLogBasicPropertiesRequired = function(res) {
 }
 
 const showEventLogBasicPropertiesRequired = function(res) {
-    showLogPropertiesRequired(res, ["event_type", "event_datetime", "event_name", "event_detail"]);
+    showLogPropertiesRequired(res, ["event_type", "event_datetime", "event_name"]);
 }
 
 const showBabyPropertiesRequired = function(res, properties) {

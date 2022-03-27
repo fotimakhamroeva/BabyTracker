@@ -147,7 +147,7 @@ const logs = {
         created_by: 1
     },
     10: {
-        id: 8,
+        id: 10,
         event_type: LogTypes.HEAD,
         event_amount: 30,
         event_unit: "cm",
@@ -156,7 +156,7 @@ const logs = {
         created_by: 1
     },
     11: {
-        id: 2,
+        id: 11,
         event_type: LogTypes.HEIGHT,
         event_amount: 63,
         event_unit: "cm",
@@ -165,7 +165,7 @@ const logs = {
         created_by: 1
     },
     12: {
-        id: 9,
+        id: 12,
         event_type: LogTypes.WEIGHT,
         event_amount: 38,
         event_unit: "lbs",
@@ -174,7 +174,7 @@ const logs = {
         created_by: 1
     },
     13: {
-        id: 8,
+        id: 13,
         event_type: LogTypes.HEAD,
         event_amount: 39,
         event_unit: "cm",
