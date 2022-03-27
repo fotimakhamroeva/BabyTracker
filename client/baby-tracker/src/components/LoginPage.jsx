@@ -9,9 +9,11 @@ export default function RegistrationPage(props) {
 
    let navigate = useNavigate();
    
-   const { userContextEmail, setUserEmail } = useContext(UserContext)
+   const { userContextEmail, setUserEmail } = useContext(UserContext);
+   const { userContextFirstName, setUserFirstName } = useContext(UserContext);
+   const { isUserLoggedIn, setUserLoggedIn } = useContext(UserContext);
 
-   const { userContextFirstName, setUserFirstName } = useContext(UserContext)
+   console.log("setUserLoggedIn" + setUserLoggedIn);
 
    const [user, setUser] = useState({
       email: '',
@@ -37,6 +39,7 @@ export default function RegistrationPage(props) {
          const { email:emailFromServer, first_name} = result.data.user
          setUserEmail(emailFromServer)
          setUserFirstName(first_name)
+         setUserLoggedIn(true);
          navigate("/user")
       })
       .catch((error) => {

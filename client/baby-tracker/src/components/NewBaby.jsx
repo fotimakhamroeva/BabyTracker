@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Button from './Button'
-
+import moment from 'moment';
+import { DateTimePicker } from "react-tempusdominus-bootstrap";
 import './NewBaby.scss'
 
 export default function NewBaby(props) {
@@ -14,7 +14,7 @@ export default function NewBaby(props) {
     first_name: '',
     last_name: '',
     date_of_birth: '',
-    location_of_birth: '',
+    birth_location: '',
     picture_url: ''
   })
 
@@ -26,12 +26,22 @@ export default function NewBaby(props) {
     setBaby(prev => ({...baby, [name]: value}))
   }
 
+  const [date, setDate] = useState(() => moment());
+  const handleDateChange = (e) => {
+    setDate(e.date);
+ }
+
   const handleSubmit = () => {
-    const { first_name, last_name, date_of_birth, location_of_birth, picture_url } = baby
-    if (!first_name || !last_name || !date_of_birth || !location_of_birth) {
+    const { first_name, last_name } = baby
+    if (!first_name || !last_name) {
       console.log('Empty values!')
       return
     }
+    if (!date) {
+      console.log('Empty date');
+      return;
+    }
+    baby['date_of_birth'] = parseInt(date.format("X"));
     console.log(baby)
     axios.post('http://localhost:8080/api/baby/', baby, {
       withCredentials: true,
@@ -77,30 +87,24 @@ export default function NewBaby(props) {
        </div>
        <div class="mb-3">
           <label for="date_of_birth" class="form-label">Date of Birth</label>
-          <input
-             className="form-control" 
-             type="text"
-             id="date_of_birth" 
-             name='date_of_birth'
-             placeholder="Enter date of birth"
-             value={baby.dateOfBirth}
-             onChange={handleChange}
-          />
+          <div id="datepicker">
+            <DateTimePicker defaultDate={moment()} onChange={handleDateChange} />
+          </div>
        </div>
        <div class="mb-3">
-          <label for="location_of_birth" class="form-label">Location of Birth</label>
+          <label for="birth_location" class="form-label">Location of Birth</label>
           <input
              className="form-control" 
              type="text"
-             id="location_of_birth" 
-             name='location_of_birth'
+             id="birth_location" 
+             name='birth_location'
              placeholder="Enter location of birth"
-             value={baby.locationOfBirth}
+             value={baby.birth_location}
              onChange={handleChange}
           />
        </div>
        <div class="mb-3">
-          <label for="picture_url" class="form-label">Location of Birth</label>
+          <label for="picture_url" class="form-label">Picture URL</label>
           <input
              className="form-control" 
              type="text"
@@ -126,58 +130,5 @@ export default function NewBaby(props) {
       </div>
     </form>
  </section>
-
-   /*  <>
-      <h1>Add baby information here</h1>
-      <form id='new-baby-form' onSubmit={(e) => e.preventDefault()}>
-        <div className="new-baby">
-          <div className="information">
-            <input
-              className="new-baby-details"
-              type="text"
-              name='first_name'
-              placeholder="Enter first name"
-              value={baby.firstName}
-              onChange={handleChange}
-            />
-            <input
-              className="new-baby-details"
-              type="text"
-              name='last_name'
-              placeholder="Enter last name"
-              value={baby.lastName}
-              onChange={handleChange}
-            />
-            <input
-              className="new-baby-details"
-              type="text"
-              name='date_of_birth'
-              placeholder="Enter date of birth"
-              value={baby.dateOfBirth}
-              onChange={handleChange}
-            />
-            <input
-              className="new-baby-details"
-              type="text"
-              name='location_of_birth'
-              placeholder="Enter location of birth"
-              value={baby.locationOfBirth}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="picture-container">
-            <input
-                className="new-baby-details"
-                type="text"
-                name='picture_url'
-                placeholder="Enter picture url"
-                value={baby.picture_url}
-                onChange={handleChange}
-              />
-          </div>
-        </div>
-        <Button className='save-button' confirm onClick={handleSubmit}>Add Baby!</Button>
-      </form>
-    </> */
   )
 }

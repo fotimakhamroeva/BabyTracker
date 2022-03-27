@@ -31,7 +31,8 @@ App.use(Express.static('public'));
 App.use(CookieSession({
     name: 'BabyTrackerSession',
     keys: ["BabyTrackerHelpsParentsTrackHealthAndVitalOfBaby"],
-    maxAge: 72 * 60 * 60 * 1000 // 72 hours
+    maxAge: 72 * 60 * 60 * 1000, // 72 hours
+    httpOnly: false
 }));
 
 const client = new Client(configObj);
