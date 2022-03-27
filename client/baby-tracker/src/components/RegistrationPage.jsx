@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import Button from './Button'
 import './RegistrationPage.scss'
 
 export default function RegistrationPage(props) {
+
+   let navigate = useNavigate();
 
    const [user, setUser] = useState({
       firstName: '',
@@ -28,6 +31,7 @@ export default function RegistrationPage(props) {
       axios.post('http://localhost:8080/api/auth/register', user)
       .then((result) => { 
          console.log(result.data)
+         navigate("/login")
       })
       .catch((error) => {
          console.log(error)
