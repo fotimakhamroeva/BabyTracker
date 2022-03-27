@@ -31,7 +31,8 @@ CREATE TABLE parent_baby (
 CREATE TABLE log (
   id SERIAL PRIMARY KEY NOT NULL,
   event_type VARCHAR(255) NOT NULL,
-  event_detail VARCHAR NOT NULL,
+  event_amount VARCHAR NOT NULL,
+  event_unit VARCHAR NOT NULL,
   event_datetime DATE,
   babyID INT REFERENCES baby(id),
   createdBY INT REFERENCES parent(id)
