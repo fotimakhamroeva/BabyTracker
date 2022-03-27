@@ -19,6 +19,7 @@ export default function LogList(props) {
            withCredentials: true,
         })
         .then((result) => {
+            console.log(result.data);
             result.data.sort(function (a, b) {
                 return a.event_datetime - b.event_datetime;
             });
@@ -28,7 +29,7 @@ export default function LogList(props) {
             setSelectedLog([]);
             //console.log(error)
         })
-      }, [selectedDate]);
+      }, [selectedDate, props.refreshState]);
     return(
         <section className="section log-list-section">
             <LogCalendar 

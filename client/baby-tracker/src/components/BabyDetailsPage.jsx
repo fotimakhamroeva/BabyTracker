@@ -33,15 +33,15 @@ export default function BabyDetailsPage(props) {
     {name: "Farenheit", value: "F"}
   ]
   const weightUnits = [
+    {name: "kilogram", value: "kg"},
     {name: "gram", value: "g"}, 
     {name: "milligram", value: "mg"},
-    {name: "kilogram", value: "kg"},
     {name: "ounce", value: "oz"},
     {name: "pound", value: "lb"}
   ]
 
   const [babyDetails, setBabyDetails] = useState({})
-
+  const [refreshState, setRefreshState] = useState(0)
   const [logsBabyHistory, setBabyLogsHistory] = useState([])
 
   const { id } = useParams()
@@ -56,25 +56,20 @@ export default function BabyDetailsPage(props) {
   }, [])
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/log/`, {
+    axios.get(`http://localhost:8080/api/log`, {
+      params: { baby_id: id },
       withCredentials: true,
     })
     .then((result) => {
       const allLogs = result.data
-      const specificBabyLogs = []
-      for (let log of allLogs) {
-        if (log.baby_id == Number(id)) {
-          specificBabyLogs.push(log)
-        }
-      }
-      setBabyLogsHistory(specificBabyLogs)
+      setBabyLogsHistory(allLogs)
     })
-  }, [])
+  }, [refreshState])
 
   const getHeightLogs = (logs) => {
     let heightLogs = []
     for (let log of logs) {
-      if (log.event_type === 'height') {
+      if (log.event_type === LogTypes.HEIGHT) {
         heightLogs.push(log)
       }
     }
@@ -84,7 +79,7 @@ export default function BabyDetailsPage(props) {
   const getWeightLogs = (logs) => {
     let weightLogs = []
     for (let log of logs) {
-      if (log.event_type === 'weight') {
+      if (log.event_type === LogTypes.WEIGHT) {
         weightLogs.push(log)
       }
     }
@@ -94,11 +89,17 @@ export default function BabyDetailsPage(props) {
   const getHeadLogs = (logs) => {
     let headLogs = []
     for (let log of logs) {
-      if (log.event_type === 'head') {
+      if (log.event_type === LogTypes.HEAD) {
         headLogs.push(log)
       }
     }
     return headLogs
+  }
+
+  const onLogComplete = () => {
+    console.log("onLogComplete");
+    const newState = refreshState+1;
+    setRefreshState(newState);
   }
 
   return(
@@ -107,7 +108,7 @@ export default function BabyDetailsPage(props) {
         <BabyInfo babyName={babyDetails.first_name + " " + babyDetails.last_name} dateOfBirth={babyDetails.date_of_birth} birthLocation={babyDetails.birth_location} babyPic={babyDetails.picture_url} />
         <div className="detailBabyInfoSpace" />
         <section className="section">
-          <h4 className="mb-3">Log {babyDetails.first_name}'s health</h4>
+          <h4 className="mb-3">Health</h4>
           <div className="row">
             <div class="col d-flex justify-content-start">
               <Button confirm children="Temperature" className="log-button" toggleType="modal" toggleTarget="#modalTemperature"/>
@@ -120,7 +121,7 @@ export default function BabyDetailsPage(props) {
               <Button confirm children="Medication" className="log-button" toggleType="modal" toggleTarget="#modalMedicine" />
             </div>
           </div>
-          <h4 className="mt-4 mb-3">Log {babyDetails.first_name}'s growth</h4>
+          <h4 className="mt-4 mb-3">Growth</h4>
           <div className="row">
             <div class="col d-flex justify-content-start">
               <Button confirmSecondary children="Head Size" className="log-button" toggleType="modal" toggleTarget="#modalHead" />
@@ -128,63 +129,82 @@ export default function BabyDetailsPage(props) {
               <Button confirmSecondary children="Weight" className="log-button" toggleType="modal" toggleTarget="#modalWeight" />
             </div>
           </div>
-          <h4 className="mt-4 mb-3">Charts</h4>
           <div className="row">
-            <Graph logs={getHeightLogs(logsBabyHistory)} measurement='Height'/>
-            <Graph logs={getWeightLogs(logsBabyHistory)} measurement='Weight'/>
-            <Graph logs={getHeadLogs(logsBabyHistory)} measurement='Head'/>
+            <div className="mt-4">
+              <Graph logs={getHeightLogs(logsBabyHistory)} measurement='Height'/>
+            </div>
+            <div className="mt-4">
+              <Graph logs={getWeightLogs(logsBabyHistory)} measurement='Weight'/>
+            </div>
+            <div className="mt-4">
+              <Graph logs={getHeadLogs(logsBabyHistory)} measurement='Head'/>
+            </div>
           </div>
         </section>
         <div className="detailBabyInfoSpace" />
       </section>
       <section className="col">
-        <LogList babyId={id} />
+        <LogList babyId={id} refreshState={refreshState} />
       </section>
 
       <LogMeasurementModal 
         modalId="modalTemperature" 
         modalTitle="Log Temperature"
         unitOptions={temperatureUnits}
-        measurementType={LogTypes.TEMPERATURE} />
+        measurementType={LogTypes.TEMPERATURE} 
+        onComplete={onLogComplete}
+        babyId={id} />
 
       <LogMeasurementModal 
         modalId="modalHead" 
         modalTitle="Log Head Size"
         unitOptions={lengthUnits}
-        measurementType={LogTypes.HEAD} />
+        measurementType={LogTypes.HEAD} 
+        onComplete={onLogComplete}
+        babyId={id} />
 
       <LogMeasurementModal 
         modalId="modalWeight" 
         modalTitle="Log Weight"
         unitOptions={weightUnits}
-        measurementType={LogTypes.WEIGHT} />
+        measurementType={LogTypes.WEIGHT} 
+        onComplete={onLogComplete}
+        babyId={id} />
 
       <LogMeasurementModal 
         modalId="modalHeight" 
         modalTitle="Log Height"
         unitOptions={lengthUnits}
-        measurementType={LogTypes.HEIGHT} />
+        measurementType={LogTypes.HEIGHT} 
+        onComplete={onLogComplete}
+        babyId={id} />
 
       <LogEventModal 
         modalId="modalMedicine" 
         modalTitle="Log Medication"
         titlePlaceholder="Ex. Baby Tylenol"
         detailPlaceholder="Ex. 5mg"
-        eventType={LogTypes.MEDICINE} />
+        eventType={LogTypes.MEDICINE} 
+        onComplete={onLogComplete}
+        babyId={id} />
 
       <LogEventModal 
         modalId="modalVaccine" 
         modalTitle="Log Vaccine"
         titlePlaceholder="Ex. 6 month vaccine"
         detailPlaceholder="Ex. Diphtheria, tetanus"
-        eventType={LogTypes.VACCINE} />
+        eventType={LogTypes.VACCINE}
+        onComplete={onLogComplete}
+        babyId={id} />
 
       <LogEventModal 
         modalId="modalAppointment" 
         modalTitle="Log Appointment"
         titlePlaceholder="Ex. 4 month checkup"
         detailPlaceholder="Ex. Dr John at Cambridge clinic"
-        eventType={LogTypes.APPOINTMENT} />
+        eventType={LogTypes.APPOINTMENT} 
+        onComplete={onLogComplete}
+        babyId={id} />
 
     </div>
   )
