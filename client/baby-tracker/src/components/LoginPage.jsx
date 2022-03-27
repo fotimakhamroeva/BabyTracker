@@ -48,9 +48,9 @@ export default function RegistrationPage(props) {
    }
 
    return(
-      <section className="section">
+      <section className="section row">
          <h2 className="pageHeading">Login into your account</h2>
-         <form className="formContainer" onSubmit={(e) => e.preventDefault()}>
+         <form className="col-7" onSubmit={(e) => e.preventDefault()}>
             <div class="mb-3">
                <label for="email" class="form-label">Email address</label>
                <input 
@@ -74,6 +74,9 @@ export default function RegistrationPage(props) {
             </div>
             <Button confirm onClick={handleSubmit}>Login!</Button>
          </form>
+         <div className="col-3">
+            <img src="/logo.gif" />
+         </div>
       </section>
    )
 }

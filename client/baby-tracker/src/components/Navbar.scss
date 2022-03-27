@@ -10,9 +10,31 @@
 nav {
   font-size: 1.2rem;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
   height: 80px;
   width: 100%;
   background-color: transparent;
+  align-items: center;
+}
+
+.navButtons {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logoContainer {
+  display: flex;
+  height: 100%;
+  align-content: center;
+  align-items: center;
+  color: $theme-primary;
+  font-weight: bold;
+  font-family: system-ui;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+nav img {
+  height: 5em;
 }
