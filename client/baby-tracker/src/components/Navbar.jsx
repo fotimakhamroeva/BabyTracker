@@ -28,7 +28,7 @@ export default function Navbar(props) {
   if (userContextFirstName) {
     return(
       <nav>
-        <span className='username'>Hello, {userContextFirstName}!</span>
+        <h4 className='username align-middle'>Hello, {userContextFirstName}!</h4>
         <Button danger onClick={handleLogout}>Logout</Button>
       </nav>
     )
