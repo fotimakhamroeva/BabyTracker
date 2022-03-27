@@ -51,7 +51,7 @@ export default function RegistrationPage(props) {
                />
             </div>
             <div class="mb-3">
-               <label for="lastName" class="form-label">First Name</label>
+               <label for="lastName" class="form-label">Last Name</label>
                <input
                   className="form-control" 
                   type="text"
