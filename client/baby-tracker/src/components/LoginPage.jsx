@@ -36,11 +36,12 @@ export default function RegistrationPage(props) {
          withCredentials: true,
       })
       .then((result) => { 
+         console.log("result:", result);
          const { email:emailFromServer, first_name} = result.data.user
          setUserEmail(emailFromServer)
          setUserFirstName(first_name)
          setUserLoggedIn(true);
-         navigate("/user")
+         // navigate("/user", {parent: "Jackson"})
       })
       .catch((error) => {
          console.log(error)

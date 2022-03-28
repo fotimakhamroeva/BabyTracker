@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios'
 import Button from './Button'
 import './RegistrationPage.scss'
+import { UserContext } from '../context/userContext'
 
 export default function RegistrationPage(props) {
+
+   const { userContextEmail, setUserEmail } = useContext(UserContext);
+   const { userContextFirstName, setUserFirstName } = useContext(UserContext);
+   const { isUserLoggedIn, setUserLoggedIn } = useContext(UserContext);
 
    const [user, setUser] = useState({
       firstName: '',
@@ -25,9 +30,15 @@ export default function RegistrationPage(props) {
          console.log('Empty values!')
          return
       }
-      axios.post('http://localhost:8080/api/auth/register', user)
+      axios.post('http://localhost:8080/api/auth/register', user, {
+         withCredentials: true,
+      })
       .then((result) => { 
          console.log(result.data)
+         const { email:emailFromServer, first_name} = result.data.user
+         setUserEmail(emailFromServer)
+         setUserFirstName(first_name)
+         setUserLoggedIn(true);
       })
       .catch((error) => {
          console.log(error)

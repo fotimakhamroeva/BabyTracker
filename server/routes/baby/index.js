@@ -7,6 +7,7 @@ const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/moc
 module.exports = (db) => {
 
 router.get('/', (req, res) => {
+    console.log("req session for security:", req.session);
     const parent = security.getParentFromSession(req);
     if (!parent) {
         security.showParentInvalid(res);

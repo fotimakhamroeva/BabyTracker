@@ -7,6 +7,7 @@ import { DateTimePicker } from "react-tempusdominus-bootstrap";
 import './NewBaby.scss'
 
 export default function NewBaby(props) {
+  console.log("NewBaby")
 
   let navigate = useNavigate();
 
@@ -19,8 +20,6 @@ export default function NewBaby(props) {
   })
 
   const handleChange = (e) => {
-    console.log(baby);
-
     const name = e.target.name
     const value = e.target.value
     setBaby(prev => ({...baby, [name]: value}))
@@ -42,11 +41,13 @@ export default function NewBaby(props) {
       return;
     }
     baby['date_of_birth'] = parseInt(date.format("X"));
+    console.log("baby")
     console.log(baby)
     axios.post('http://localhost:8080/api/baby/', baby, {
       withCredentials: true,
     })
     .then((result) => { 
+      console.log("addbaby")
       console.log(result.data)
       navigate("/user")
       })

@@ -20,7 +20,9 @@ module.exports = (db) => {
             
             .then((result) => {
                 const user = result.rows[0];
+                console.log("USER:", user);
                 req.session.user = user;
+                console.log("req session:", req.session);
                 res.status(200).json({ message : "Login successful.", user})
             })
             .catch((error) => {
@@ -44,16 +46,23 @@ module.exports = (db) => {
         }
         db.query('INSERT INTO parent (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) returning *', 
         [userData.first_name, userData.last_name, userData.email, userData.password] )
-        .then((res) => {console.log(res)})
+        .then((response) => {
+            // console.log("RESPONSE:",response.rows[0])
+            req.session.user = response.rows[0];
+            console.log("Req session:", req.session);
+
+            return res.status(200).json({ message : "Register successful.", user: response.rows[0]})
+
+        })
         .catch((error) => console.log(error));
 
-        users[userData.email] = userData;
-        let userToUse = JSON.parse(JSON.stringify(userData));
-        delete userToUse.password;
-        req.session.user = userToUse;
+        // users[userData.email] = userData;
+        // let userToUse = JSON.parse(JSON.stringify(userData));
+        // delete userToUse.password;
+        // // req.session.user = userToUse;
         console.log("req.body:",req.body);
-        console.log("userData:",userData);
-        return res.status(200).json({ message : "Register successful." })
+        // console.log("user to user:",userToUse);
+        // return res.status(200).json({ message : "Register successful.", user: userData })
         
     });
     

@@ -20,6 +20,7 @@ const isBabyYours = function(babyId, parentId) {
 
 const getParentFromSession = function(req) {
     const parent = req.session.user;
+    console.log("parent:", parent);
     if (parent && parent.id && parent.email) {
         return parent;
     }

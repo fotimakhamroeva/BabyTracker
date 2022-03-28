@@ -6,7 +6,8 @@ import { UserContext } from "../context/userContext";
 import BabyListItem from './BabyListItem';
 import "./BabyList.scss";
 
-export default function BabyList(props) {
+export default function BabyList(props) { 
+  console.log("BabyList")
 
   const { userContextBaby, setUserBaby } = useContext(UserContext)
 
@@ -21,12 +22,14 @@ export default function BabyList(props) {
       withCredentials: true
     })
     .then((result) => {
+      console.log("result ")
+      console.log(result)
       setBabies(result.data)
     })
   }, [])
 
   const goToNewBabyPage = () => {
-    navigate('/newbaby')
+    navigate('/newbaby', {props})
   }
 
 
