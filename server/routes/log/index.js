@@ -92,6 +92,7 @@ Example for Temperature:
 }
 */
 router.post('/:baby_id/measurement', (req,res) => {
+    console.log("measurements:", req.body);
     const parent = security.getParentFromSession(req);
     if (!parent) {
         security.showParentInvalid(res);
@@ -110,6 +111,7 @@ router.post('/:baby_id/measurement', (req,res) => {
     const logData = {
         id: utils.getNewId(Object.keys(logs)),
         event_type: req.body.event_type,
+        // event_amount: 2,
         event_amount: req.body.event_amount,
         event_unit: req.body.event_unit,
         event_datetime: new Date(req.body.event_datetime),
@@ -150,30 +152,36 @@ Example for Appointment:
 }
 */
 router.post('/:baby_id/event', (req,res) => {
+    // console.log("res.body", res);
+    console.log("Insdie 155:", req.body);
     const parent = security.getParentFromSession(req);
-    if (!parent) {
-        security.showParentInvalid(res);
-        return;
-    }
-    const babyId = utils.parseIntOrUndefined(req.params.baby_id);
-    if (!babyId || !security.isBabyYours(babyId, parent.id)) {
-        security.showBabyInvalid(res);
-        return;
-    }
-    const areBasicPropertiesProvided = security.areBasicEventLogPropertiesProvided(req);
-    if (!areBasicPropertiesProvided) {
-        security.showEventLogBasicPropertiesRequired(res);
-        return;
-    }
+    // if (!parent) {
+    //     security.showParentInvalid(res);
+    //     return;
+    // }
+    // const babyId = utils.parseIntOrUndefined(req.params.baby_id);
+    // if (!babyId || !security.isBabyYours(babyId, parent.id)) {
+    //     security.showBabyInvalid(res);
+    //     return;
+    // }
+    // const areBasicPropertiesProvided = security.areBasicEventLogPropertiesProvided(req);
+    // if (!areBasicPropertiesProvided) {
+    //     security.showEventLogBasicPropertiesRequired(res);
+    //     return;
+    // }
     const logData = {
-        id: utils.getNewId(Object.keys(logs)),
+        // id: 500,
+        // // id: utils.getNewId(Object.keys(logs)),
         event_type: req.body.event_type,
         event_name: req.body.event_name,
         event_detail: req.body.event_detail,
+        // event_amount: 2,
+        // event_unit: 10,
         event_datetime: new Date(req.body.event_datetime),
         babyID: babyId,
         createdBY: parent.id
     }
+    console.log("logData", logData);
     db.query('INSERT INTO log (event_type, event_name, event_detail, event_datetime, babyID, createdBY ) VALUES ($1, $2, $3, $4, $5, $6) returning *', 
     [logData.event_type, logData.event_name, logData.event_detail, logData.event_datetime, logData.babyID, logData.createdBY]  )
     .then((res) => {console.log(res)})
