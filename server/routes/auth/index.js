@@ -28,8 +28,8 @@ router.post('/register', (req,res) => {
     users[userData.email] = userData;
     let userToUse = JSON.parse(JSON.stringify(userData));
     delete userToUse.password;
-    req.session.user = userToUse;
-    return res.status(200).json({ message : "Register successful." })
+    //req.session.user = userToUse;
+    return res.status(200).json({ message : "Register successful.", user: userToUse })
 });
 
 router.post('/logout', (req, res) => {
