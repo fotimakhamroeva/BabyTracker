@@ -4,7 +4,6 @@ const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/moc
 
 module.exports = (db) => {
 
-    
     router.post('/login', (req,res) => {
         // console.log(users)
         const email = req.body.email;
@@ -34,7 +33,6 @@ module.exports = (db) => {
        
     });
     
-    
     router.post('/register', (req,res) => {
         const userData = {
             first_name: req.body.firstName,
@@ -50,18 +48,17 @@ module.exports = (db) => {
         users[userData.email] = userData;
         let userToUse = JSON.parse(JSON.stringify(userData));
         delete userToUse.password;
-        req.session.user = userToUse;
+        //req.session.user = userToUse;
         console.log("req.body:",req.body);
         console.log("userData:",userData);
-        return res.status(200).json({ message : "Register successful." })
+        return res.status(200).json({ message : "Register successful.", user: userToUse })
         
     });
-    
     
     router.post('/logout', (req, res) => {
         req.session = null;
         return res.status(200).json({ message : "Logout successful." })
     });
-return router;    
+
+    return router;    
 }
-    // module.exports = router;

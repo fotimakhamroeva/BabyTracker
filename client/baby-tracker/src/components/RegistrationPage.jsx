@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import Button from './Button'
 import './RegistrationPage.scss'
 
 export default function RegistrationPage(props) {
+
+   let navigate = useNavigate();
 
    const [user, setUser] = useState({
       firstName: '',
@@ -25,9 +28,12 @@ export default function RegistrationPage(props) {
          console.log('Empty values!')
          return
       }
-      axios.post('http://localhost:8080/api/auth/register', user)
+      axios.post('http://localhost:8080/api/auth/register', user, {
+         withCredentials: true,
+      })
       .then((result) => { 
          console.log(result.data)
+         navigate("/login")
       })
       .catch((error) => {
          console.log(error)
