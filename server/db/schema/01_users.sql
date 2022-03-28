@@ -10,6 +10,7 @@ CREATE TABLE parent(
   last_name VARCHAR(255),
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL
+
 );
 
 
@@ -19,25 +20,28 @@ CREATE TABLE baby(
   last_name VARCHAR(255),
   date_of_birth TIMESTAMP,
   born_at VARCHAR(255),
-  picture_url VARCHAR(255)
+  picture_url VARCHAR(255),
+  parentId INT NOT NULL,
+  FOREIGN KEY (parentId) REFERENCES parent(id)
 );
 
-CREATE TABLE parent_baby (
-  id SERIAL PRIMARY KEY NOT NULL,
-  babyID INT REFERENCES baby(id),
-  createdBY INT REFERENCES parent(id)
-);
+-- CREATE TABLE parent_baby (
+--   id SERIAL PRIMARY KEY NOT NULL,
+--   FOREIGN KEY (id) AS babyID REFERENCES baby(id),
+--   FOREIGN KEY (id) AS parentID REFERENCES parent(id)
+-- );
 
 CREATE TABLE log (
   id SERIAL PRIMARY KEY NOT NULL,
-  event_name VARCHAR(255) NOT NULL,
-  event_detail VARCHAR(255) NOT NULL,
-  event_type VARCHAR(255) NOT NULL,
-  event_amount VARCHAR NOT NULL,
-  event_unit VARCHAR NOT NULL,
-  event_datetime DATE,
-  babyID INT REFERENCES baby(id),
-  createdBY INT REFERENCES parent(id)
+  event_name VARCHAR(255),
+  event_detail VARCHAR(255),
+  event_type VARCHAR(255),
+  event_amount VARCHAR(255),
+  event_unit VARCHAR(255),
+  event_datetime TIMESTAMP,
+  babyId INT,
+  FOREIGN KEY (babyId) REFERENCES baby(id)
+
 );
 
 

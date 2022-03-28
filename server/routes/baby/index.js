@@ -13,14 +13,18 @@ router.get('/', (req, res) => {
         return;
     }
     const babiesToReturn = [];
-    const filteredParentBaby = Object.values(parentBabies).filter(parentBaby => parentBaby.parent_id === parent.id );
-    filteredParentBaby.forEach(parentBaby => {
-        const baby = babies[parentBaby.baby_id];
-        if (baby) {
-            babiesToReturn.push(baby);
-        }
-    });
-    res.status(200).json(babiesToReturn);
+
+    db.query('SELECT baby.id, baby.first_name, baby.last_name, baby.date_of_birth, baby.born_at, baby.picture_url FROM baby INNER JOIN parent ON parentId = parent.id AND parent.id = $1', [parent.id])
+        .then((results) => {
+            results.rows.forEach(babyData => {
+                console.log(babyData)
+                const baby = babyData
+                babiesToReturn.push(baby)
+            })
+            console.log(babiesToReturn)
+            res.status(200).json(babiesToReturn);
+        })
+        .catch((error) => console.log(error));
 });
 
 router.get('/:baby_id', (req, res) => {
@@ -65,9 +69,8 @@ router.post('/', (req,res) => {
         born_at: req.body.birth_location,
         picture_url: req.body.picture_url
     }
-    console.log("baby date:", babyData.date_of_birth);
-    db.query('INSERT INTO baby (first_name, last_name, date_of_birth, born_at, picture_url ) VALUES ($1, $2, $3, $4, $5) returning *', 
-        [babyData.first_name, babyData.last_name, babyData.date_of_birth, babyData.born_at, babyData.picture_url]  )
+    db.query('INSERT INTO baby (first_name, last_name, date_of_birth, born_at, picture_url, parentId) VALUES ($1, $2, $3, $4, $5, $6) returning *', 
+        [babyData.first_name, babyData.last_name, babyData.date_of_birth, babyData.born_at, babyData.picture_url, parent.id]  )
         .then((res) => {console.log(res)})
         .catch((error) => console.log(error));
 
