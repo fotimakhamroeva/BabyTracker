@@ -44,7 +44,7 @@ module.exports = (db) => {
             email: req.body.email,
             password: req.body.password,
         }
-        db.query('INSERT INTO parent (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) returning *', 
+        db.query('INSERT INTO parent (first_name, last_name, email, password) VALUES ($1, $2, $3, $4)', 
         [userData.first_name, userData.last_name, userData.email, userData.password] )
         .then((response) => {
             // console.log("RESPONSE:",response.rows[0])
@@ -60,7 +60,7 @@ module.exports = (db) => {
         // let userToUse = JSON.parse(JSON.stringify(userData));
         // delete userToUse.password;
         // // req.session.user = userToUse;
-        console.log("req.body:",req.body);
+        //console.log("req.body:",req.body);
         // console.log("user to user:",userToUse);
         // return res.status(200).json({ message : "Register successful.", user: userData })
         

@@ -10,6 +10,7 @@ export default function BabyListItem(props) {
   let navigate = useNavigate();
 
   const goToBabyDetailsPage = (baby) => {
+    console.log("gotobabydetails")
     navigate(`/babydetails/${id}`)
   }
 

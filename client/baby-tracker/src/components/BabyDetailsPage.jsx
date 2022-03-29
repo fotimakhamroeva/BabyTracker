@@ -45,13 +45,16 @@ export default function BabyDetailsPage(props) {
   const [logsBabyHistory, setBabyLogsHistory] = useState([])
 
   const { id } = useParams()
+  console.log("Made it 3")
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/baby/${id}`, {
       withCredentials: true,
     })
-    .then((result) => {
-      setBabyDetails(result.data)
+    .then((results) => {
+      console.log("MADE IT")
+      //console.log(results.data)
+      setBabyDetails(results.data)
     })
   }, [])
 
@@ -105,7 +108,7 @@ export default function BabyDetailsPage(props) {
   return(
     <div className="row align-items-start">
       <section className="col">
-        <BabyInfo babyName={babyDetails.first_name + " " + babyDetails.last_name} dateOfBirth={babyDetails.date_of_birth} birthLocation={babyDetails.birth_location} babyPic={babyDetails.picture_url} />
+        <BabyInfo babyName={babyDetails.first_name + " " + babyDetails.last_name} dateOfBirth={new Date(babyDetails.date_of_birth)} birthLocation={babyDetails.born_at} babyPic={babyDetails.picture_url} />
         <section className="section">
           <h4 className="mb-3">Health</h4>
           <div className="row">

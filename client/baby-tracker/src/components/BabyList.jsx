@@ -22,8 +22,6 @@ export default function BabyList(props) {
       withCredentials: true
     })
     .then((result) => {
-      console.log("result ")
-      console.log(result)
       setBabies(result.data)
     })
   }, [])
@@ -31,8 +29,7 @@ export default function BabyList(props) {
   const goToNewBabyPage = () => {
     navigate('/newbaby', {props})
   }
-
-
+  
 
   babyListItems = babies.map((baby) => {
     return(

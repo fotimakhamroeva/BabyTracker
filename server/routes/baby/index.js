@@ -7,7 +7,7 @@ const { LogTypes, users, logs, babies, parentBabies } = require('../../utils/moc
 module.exports = (db) => {
 
 router.get('/', (req, res) => {
-    console.log("req session for security:", req.session);
+    //console.log("req session for security:", req.session);
     const parent = security.getParentFromSession(req);
     if (!parent) {
         security.showParentInvalid(res);
@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
                 const baby = babyData
                 babiesToReturn.push(baby)
             })
-            console.log(babiesToReturn)
             res.status(200).json(babiesToReturn);
         })
         .catch((error) => console.log(error));
@@ -34,12 +33,17 @@ router.get('/:baby_id', (req, res) => {
         security.showParentInvalid(res);
         return;
     }
-    const baby = babies[req.params.baby_id];
-    if(baby) {
-        res.status(200).json(baby)
-    } else {
-        res.status(200).json({})
-    }
+
+    db.query('SELECT * FROM baby WHERE id = $1', [req.params.baby_id])
+    .then((results) => {
+        console.log("MADE IT2")
+        console.log(req.params)
+        const baby = results.rows[0]
+        console.log(baby)
+
+        res.status(200).json(baby);
+    })
+    
 });
 
 /* 
@@ -70,7 +74,7 @@ router.post('/', (req,res) => {
         born_at: req.body.birth_location,
         picture_url: req.body.picture_url
     }
-    db.query('INSERT INTO baby (first_name, last_name, date_of_birth, born_at, picture_url, parentId) VALUES ($1, $2, $3, $4, $5, $6) returning *', 
+    db.query('INSERT INTO baby (first_name, last_name, date_of_birth, born_at, picture_url, parentId) VALUES ($1, $2, $3, $4, $5, $6)', 
         [babyData.first_name, babyData.last_name, babyData.date_of_birth, babyData.born_at, babyData.picture_url, parent.id]  )
         .then((res) => {console.log(res)})
         .catch((error) => console.log(error));

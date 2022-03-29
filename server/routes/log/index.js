@@ -115,13 +115,12 @@ router.post('/:baby_id/measurement', (req,res) => {
         event_amount: req.body.event_amount,
         event_unit: req.body.event_unit,
         event_datetime: new Date(req.body.event_datetime),
-        babyID: babyId,
-        createdBY: parent.id
+        babyId: babyId
     }
-    db.query('INSERT INTO log (event_type, event_amount, event_unit, event_datetime, babyID, createdBY ) VALUES ($1, $2, $3, $4, $5, $6) returning *', 
-    [logData.event_type, logData.event_amount, logData.event_unit, logData.event_datetime, logData.babyID, logData.createdBY]  )
-    .then((res) => {console.log(res)})
-    .catch((error) => console.log(error));
+    // db.query('INSERT INTO log (event_type, event_amount, event_unit, event_datetime, babyId ) VALUES ($1, $2, $3, $4, $5) returning *', 
+    // [logData.event_type, logData.event_amount, logData.event_unit, logData.event_datetime, logData.babyId]  )
+    // .then((res) => {console.log(res)})
+    // .catch((error) => console.log(error));
 
     logs[logData.id] = logData;
     utils.show201SuccessMessage(res, logData);
