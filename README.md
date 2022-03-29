@@ -1,8 +1,22 @@
-# BabyTracker
- Baby Tracker offers a simple streamlined way to track baby's daily habits, health, and vitals
+BabyTracker - final project for Lighthouse Labs bootcamp
+======
 
+Baby Tracker offers a simple streamlined way to track baby's daily habits, health, and vitals
 
-## Group Members:
-1) Fotima
-2) Youssef
-3) Akbar
+![alt text](baby-tracker.gif)
+
+# Tech stack
+Node JS
+Express
+React
+PostgreSQL 
+
+# Server Setup
+
+Install dependencies with npm install.
+Run with npm start
+
+# Client Setup
+
+Install dependencies with npm install
+Go to localhost:3000 to use application.
